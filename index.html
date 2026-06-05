@@ -1,249 +1,400 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Perry the Developer</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Perry Kwabena Amoako — Software Engineer & AI Builder</title>
+  <meta name="description" content="Portfolio of Perry Kwabena Amoako, a Ghanaian software engineer building secure, scalable, AI-driven systems for Africa and beyond." />
+  
+  <!-- Preconnect & Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Instrument+Serif&display=swap" rel="stylesheet" />
+  
+  <!-- Tailwind CSS v3 + basic config (CDN) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Custom overrides & brand theme (must come after Tailwind) -->
+  <style>
+    /* ---------- DESIGN SYSTEM : brand colors & kente pattern ---------- */
+    :root {
+      --brand-earth: #b87b4a;    /* earthy terracotta */
+      --brand-forest: #2f6b47;   /* deep forest green */
+      --brand-earth-rgb: 184, 123, 74;
+      --brand-forest-rgb: 47, 107, 71;
+    }
+    
+    /* custom utility classes for brand colors (opacity variants) */
+    .bg-brand-earth { background-color: var(--brand-earth); }
+    .text-brand-earth { color: var(--brand-earth); }
+    .bg-brand-earth\/10 { background-color: rgba(var(--brand-earth-rgb), 0.1); }
+    .border-brand-earth\/20 { border-color: rgba(var(--brand-earth-rgb), 0.2); }
+    
+    .bg-brand-forest { background-color: var(--brand-forest); }
+    .text-brand-forest { color: var(--brand-forest); }
+    .bg-brand-forest\/10 { background-color: rgba(var(--brand-forest-rgb), 0.1); }
+    
+    /* Kente-inspired pattern (subtle woven texture) */
+    .kente-pattern {
+      background-image: repeating-linear-gradient(45deg, rgba(0,0,0,0.02) 0px, rgba(0,0,0,0.02) 2px, transparent 2px, transparent 8px),
+                        repeating-linear-gradient(135deg, rgba(0,0,0,0.01) 0px, rgba(0,0,0,0.01) 2px, transparent 2px, transparent 8px);
+      pointer-events: none;
+    }
+    .dark .kente-pattern {
+      background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 8px),
+                        repeating-linear-gradient(135deg, rgba(255,255,255,0.01) 0px, rgba(255,255,255,0.01) 2px, transparent 2px, transparent 8px);
+    }
+    
+    /* smooth scroll behavior */
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    /* custom font overrides & default body */
+    body {
+      font-family: 'Instrument Sans', system-ui, -apple-system, sans-serif;
+      background-color: #fafaf9;
+    }
+    .font-serif-custom {
+      font-family: 'Instrument Serif', serif;
+    }
+    
+    /* timeline dot styling for experience */
+    .timeline-dot-active {
+      background-color: var(--brand-earth);
+      box-shadow: 0 0 0 4px #18181b;
+    }
+    .timeline-dot-inactive {
+      background-color: #3f3f46;
+      box-shadow: 0 0 0 4px #18181b;
+    }
+    
+    /* force card transitions (optional) */
+    .project-card {
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .project-card:hover {
+      transform: translateY(-4px);
+    }
+    
+    /* custom ring/border helpers */
+    .ring-black\/5 {
+      --tw-ring-opacity: 0.05;
+      box-shadow: 0 0 0 1px rgba(0,0,0,0.05);
+    }
+    .ring-white\/5 {
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.05);
+    }
+    
+    /* hide scrollbar for cleaner look (optional) */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+  </style>
 </head>
+<body class="bg-zinc-50 text-zinc-900 antialiased selection:bg-brand-earth/20">
 
-<body>
-  <!-- Header Section -->
-  <header class="header-section">
-    <div class="header container">
-      <a href="#"><img src="assests/kwapee-light.png" alt="web developer" class="logo" /></a>
-      <nav>
-        <ul class="nav-items">
-          <li class="nav-item">
-            <a href="About.html">About</a>
-          </li>
-          <li class="nav-item">
-            <a href="#Portfolio">Portfolio</a>
-          </li>
-          <li class="nav-item">
-            <a href="#Contact">Contact</a>
-          </li>
-          <div class="header-buttons">
-            <i class="lni lni-sun theme-toggle">mode</i>
-            <a href="tel:233558270504" class="btn">Hire Me</a>
-          </div>
-        </ul>
-      </nav>
+  <!-- FIXED NAVIGATION -->
+  <nav class="fixed top-0 w-full z-50 bg-zinc-50/80 backdrop-blur-md border-b border-zinc-200/50">
+    <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="#top" class="font-medium tracking-tight text-zinc-900 text-lg">KWAPEE</a>
+      <div class="flex gap-8 text-sm font-medium text-zinc-500">
+        <a href="#projects" class="hover:text-brand-earth transition-colors">Projects</a>
+        <a href="#experience" class="hover:text-brand-earth transition-colors">Experience</a>
+        <a href="#contact" class="hover:text-brand-earth transition-colors">Contact</a>
+      </div>
+    </div>
+  </nav>
 
-      <i class="lni lni-menu menu-toggle"></i>
+  <!-- HERO SECTION -->
+  <header id="top" class="relative pt-32 pb-20 overflow-hidden">
+    <div class="absolute inset-0 kente-pattern" aria-hidden></div>
+    <div class="max-w-6xl mx-auto px-6 relative">
+      <div class="max-w-[65ch]">
+        <p class="text-xs font-bold uppercase tracking-[0.3em] text-brand-earth mb-6">Software Engineer • Accra, Ghana</p>
+        <h1 class="text-4xl md:text-6xl font-medium tracking-tight leading-tight text-balance text-zinc-950 mb-6">Perry Kwabena Amoako</h1>
+        <p class="text-xl md:text-2xl text-zinc-600 font-serif-custom italic mb-8">Software Engineer | AI &amp; Scalable Systems Builder</p>
+        <p class="text-lg text-zinc-600 leading-relaxed text-pretty max-w-[56ch] mb-10">
+          Building secure, scalable, and impact-driven technology for Africa and beyond bridging
+          the gap between advanced computation and real-world utility.
+        </p>
+        <div class="flex flex-wrap gap-4">
+          <a href="#projects" class="bg-zinc-900 text-zinc-50 px-6 py-2.5 rounded-full text-sm font-medium ring-1 ring-zinc-900 hover:bg-zinc-800 transition-colors flex items-center gap-2">
+            View Projects
+            <span class="size-1.5 rounded-full bg-brand-earth"></span>
+          </a>
+          <a href="#contact" class="bg-zinc-100 text-zinc-900 px-6 py-2.5 rounded-full text-sm font-medium ring-1 ring-black/5 hover:bg-zinc-200 transition-colors">Contact Me</a>
+        </div>
+      </div>
     </div>
   </header>
 
-  <!-- Hero Section -->
-  <section class="hero-section">
-    <div class="hero container">
-      <h1 class="hero-title">Hello, I'm a Software Engineer</h1>      
-      <p class="hero-description">
-        I love creating beautiful pieces that work on the web, both sites and
-        apps.
-      </p>
-     <!-- <a href="https://drive.google.com/file/d/1rmf-6m8G9voB-8GoMiQ8nszJjMnztFWp/view?usp=sharing" class="btn">Download
-        CV <i class="lni lni-download"></i></a>-->
-    </div>
-  </section>
-
-  <!-- Skills Section -->
-  <section class="skills-section">
-    <div class="skills container">
-      <h2 class="section-title">SKILLS</h2>
-      <div class="skill-cards">
-        <div class="card">
-          <i class="lni lni-html5"></i>
-          <h3 class="skill-title">HTML</h3>
-          <p class="skill-description">
-            Proficient in creating structured and semantic web pages using
-            HTML, ensuring clear organization and accessibility of content.
-          </p>
-        </div>
-        <div class="card">
-          <i class="lni lni-css3"></i>
-          <h3 class="skill-title">CSS</h3>
-          <p class="skill-description">
-            Skilled in using CSS to style and design web pages, including
-            layout, typography, and responsive design, enhancing the visual
-            appeal and user experience.
-          </p>
-        </div>
-        <div class="card">
-          <i class="lni lni-javascript"></i>
-          <h3 class="skill-title">JAVASCRIPT</h3>
-          <p class="skill-description">
-            Experienced in leveraging JavaScript to add interactivity and
-            dynamic features to websites, enhancing user engagement and
-            functionality.
-          </p>
-        </div>
-        <div class="card">
-          <i class="lni lni-flutter"></i>
-          <h3 class="skill-title">FLUTTER</h3>
-          <p class="skill-description">
-            Proficient in developing dynamic and interactive mobile and web
-            applications using Flutter.
-          </p>
-        </div>
-        <div class="card">
-          <i class="lni lni-java"></i>
-          <h3 class="skill-title">JAVA</h3>
-          <p class="skill-description">
-            Proficient in developing dynamic and interactive android mobile
-            applications using Java.
-          </p>
-        </div>
-        <div class="card">
-          <i class="lni lni-python"></i>
-          <h3 class="skill-title">PYTHON</h3>
-          <p class="skill-description">
-            Experienced in using Python to develop amazing model in artifical
-            Intelligence and Machine learning. Python contain great laberies
-            that help in building interesting projects.
-          </p>
-        </div>
-        <div class="card">
-          <i class="lni lni-ux"></i>
-          <h3 class="skill-title">UI/UX</h3>
-          <p class="skill-description">
-            Experienced in designing intuitive and visually appealing user
-            interfaces (UI), while prioritizing user experience (UX) to create
-            seamless and engaging interactions for website visitors.
-          </p>
+  <!-- BACKGROUND (ABOUT) SECTION -->
+  <section class="py-24 border-t border-zinc-200">
+    <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12">
+      <div class="lg:col-span-4">
+        <h2 class="text-sm font-medium uppercase tracking-widest text-brand-earth mb-4">Background</h2>
+        <p class="text-2xl font-medium tracking-tight text-zinc-900">Engineering impact from Accra to the world.</p>
+      </div>
+      <div class="lg:col-span-8">
+        <div class="space-y-6 text-zinc-600 text-pretty max-w-[56ch]">
+          <p>A BSc Information Technology Management graduate from UPSA (2024), my journey is defined by a deep-seated passion for AI-driven identity systems, cybersecurity, fintech, and public-sector innovation. Technology shouldn't just exist, it should solve.</p>
+          <p>Whether it's architecting AI workflows at BuildSpace, leading a hackathon-winning team at Trestle Academy, or shipping secure banking infrastructure at Bsystems, my focus stays constant: scalability, security, and human-centered design.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Portfolio Section -->
-  <section class="portfolio-section" id="Portfolio">
-    <div class="portfolio container">
-      <h2 class="section-title">PORTFOLIO</h2>
-      <div class="portfolio-items">
-        <div class="portfolio-item">
-          <img src="assests/blog.jpg" />
-          <div class="portfolio-detail">
-            <p class="item-name">Blog Website</p>
-            <p class="item-description">
-              The Inspired Insight Blog is my maiden project after finishing
-              my Software egineering program. It contains contents from tech,
-              design and mobile with indepth description of the chosen topic
-              in each feild.
-            </p>
-            <a href="https://kwapee.github.io/Blog/" target="_blank">Check it out <i
-                class="lni lni-arrow-right"></i></a>
-          </div>
+  <!-- SKILLS (4 columns) -->
+  <section class="py-24 bg-zinc-100/50">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-12">
+        <!-- Programming -->
+        <div>
+          <h3 class="text-xs font-semibold uppercase tracking-wider text-zinc-400 mb-6">Programming</h3>
+          <ul class="space-y-3 text-sm font-medium text-zinc-700">
+            <li class="flex items-center gap-2"><span class="size-1 bg-brand-earth rounded-full"></span> Python</li>
+            <li class="flex items-center gap-2"><span class="size-1 bg-brand-earth rounded-full"></span> Dart / Flutter</li>
+            <li class="flex items-center gap-2"><span class="size-1 bg-brand-earth rounded-full"></span> Java / SpringBoot</li>
+          </ul>
         </div>
-
-        <div class="portfolio-item">
-          <img src="assests/kakum.jpg" />
-          <div class="portfolio-detail">
-            <p class="item-name">Tourist Site Website</p>
-            <p class="item-description">
-              Kakum National Park, located in the coastal environs of the
-              Central Region of Ghana, covers an area of 375 square kilometres
-              (145 sq mi). The area is covered with tropical
-              forest.
-            </p>
-            <a href="https://kwapee.github.io/project/" target="_blank">Check it out <i
-                class="lni lni-arrow-right"></i></a>
-          </div>
+        <!-- Cloud & Data -->
+        <div>
+          <h3 class="text-xs font-semibold uppercase tracking-wider text-zinc-400 mb-6">Cloud & Data</h3>
+          <ul class="space-y-3 text-sm font-medium text-zinc-700">
+            <li class="flex items-center gap-2"><span class="size-1 bg-brand-earth rounded-full"></span> AWS Architecture</li>
+            <li class="flex items-center gap-2"><span class="size-1 bg-brand-earth rounded-full"></span> PostgreSQL / Firebase</li>
+            <li class="flex items-center gap-2"><span class="size-1 bg-brand-earth rounded-full"></span> REST & GraphQL</li>
+          </ul>
         </div>
-
-        <div class="portfolio-item">
-          <img src="assests/mobile.jpeg" />
-          <div class="portfolio-detail">
-            <p class="item-name">Mobile app projects</p>
-            <p class="item-description">
-              This is to show all my mobile app projects. Note, it can only be run on
-              android devices because its an android apk.
-            </p>
-            <a href="https://drive.google.com/drive/folders/1umfqPQPC3vCIkAA1GpnFgMlujXCSZ5gI" target="_blank">Check it
-              out <i class="lni lni-arrow-right"></i></a>
-          </div>
+        <!-- Intelligence -->
+        <div>
+          <h3 class="text-xs font-semibold uppercase tracking-wider text-zinc-400 mb-6">Intelligence</h3>
+          <ul class="space-y-3 text-sm font-medium text-zinc-700">
+            <li class="flex items-center gap-2"><span class="size-1 bg-brand-earth rounded-full"></span> Computer Vision</li>
+            <li class="flex items-center gap-2"><span class="size-1 bg-brand-earth rounded-full"></span> OpenCV / ML</li>
+            <li class="flex items-center gap-2"><span class="size-1 bg-brand-earth rounded-full"></span> AI Workflows</li>
+          </ul>
         </div>
-  </section>
-
-  <!-- Contact Section -->
-  <section class="contact-section" id="Contact">
-    <div class="contact container">
-      <form action="#" class="contact-form">
-        <input type="text" placeholder="Name" />
-        <input type="email" placeholder="someone@mail.com" />
-        <input type="tel" placeholder="+233 (0) 55 827 0504" />
-        <select>
-          <option disabled selected>Selct Project</option>
-          <option value="webdev">Website Development</option>
-          <option value="mobdev">Mobile App Development</option>
-          <option value="consult">Consultation</option>
-          <option value="enquiry">General Enquiry</option>
-        </select>
-        <button class="btn">Submit</button>
-      </form>
-      <div class="contact-details">
-        <p>Call or send an email</p>
-        <div class="phone">
-          <i class="lni lni-phone"></i>
-          <div class="phone-numbers">
-            <a href="tel:233558270504">+233 (0) 55 827 0504</a>
-          </div>
-        </div>
-        <div class="email">
-          <i class="lni lni-envelope"></i>
-          <a href="mailto:p.amoako2002@gmail.com">p.amoako2002@gmail.com</a>
+        <!-- Security -->
+        <div>
+          <h3 class="text-xs font-semibold uppercase tracking-wider text-zinc-400 mb-6">Security</h3>
+          <ul class="space-y-3 text-sm font-medium text-zinc-700">
+            <li class="flex items-center gap-2"><span class="size-1 bg-brand-earth rounded-full"></span> CyberOps Associate</li>
+            <li class="flex items-center gap-2"><span class="size-1 bg-brand-earth rounded-full"></span> IAM Systems</li>
+            <li class="flex items-center gap-2"><span class="size-1 bg-brand-earth rounded-full"></span> Secure App Dev</li>
+          </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <footer class="footer-section">
-    <div class="footer container">
-      <p class="footer-text">&copy; Kwapee | Software Engineer</p>
+  <!-- PROJECTS SECTION -->
+  <section id="projects" class="py-24">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="mb-16">
+        <h2 class="text-3xl font-medium tracking-tight text-zinc-900 mb-4">Featured Engineering Work</h2>
+        <p class="text-zinc-500 max-w-[56ch]">Case studies in scalability, automated intelligence, and financial infrastructure.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        
+        <!-- Project 1: Facial Recognition (earth) -->
+        <div class="group bg-white rounded-2xl p-8 ring-1 ring-black/5 flex flex-col h-full project-card">
+          <div class="mb-6 flex justify-between items-start">
+            <div class="size-10 bg-brand-earth/10 rounded-xl grid place-items-center font-bold text-brand-earth">AI</div>
+            <span class="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Identity</span>
+          </div>
+          <h3 class="text-xl font-medium mb-3 text-zinc-900">Facial Recognition Attendance</h3>
+          <p class="text-sm text-zinc-600 mb-6 text-pretty">Problem: Manual tracking inefficiencies in high-traffic environments. Impact: Reduced processing time by 85% using OpenCV and Machine Learning for real-time biometric verification.</p>
+          <div class="mt-auto flex flex-wrap gap-2">
+            <span class="px-2 py-1 bg-zinc-100 text-[10px] font-semibold rounded uppercase tracking-wider text-zinc-500">Python</span>
+            <span class="px-2 py-1 bg-zinc-100 text-[10px] font-semibold rounded uppercase tracking-wider text-zinc-500">OpenCV</span>
+            <span class="px-2 py-1 bg-zinc-100 text-[10px] font-semibold rounded uppercase tracking-wider text-zinc-500">ML</span>
+          </div>
+        </div>
+
+        <!-- Project 2: Revenue Mobilization (forest) -->
+        <div class="group bg-white rounded-2xl p-8 ring-1 ring-black/5 flex flex-col h-full project-card">
+          <div class="mb-6 flex justify-between items-start">
+            <div class="size-10 bg-brand-forest/10 rounded-xl grid place-items-center font-bold text-brand-forest">Fin</div>
+            <span class="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Fintech</span>
+          </div>
+          <h3 class="text-xl font-medium mb-3 text-zinc-900">Revenue Mobilization Platform</h3>
+          <p class="text-sm text-zinc-600 mb-6 text-pretty">Problem: Leakages in informal sector revenue collection. Impact: Digitized collection for 2k+ users on Flutter and Firebase, increasing transparency and auditability by 40%.</p>
+          <div class="mt-auto flex flex-wrap gap-2">
+            <span class="px-2 py-1 bg-zinc-100 text-[10px] font-semibold rounded uppercase tracking-wider text-zinc-500">Flutter</span>
+            <span class="px-2 py-1 bg-zinc-100 text-[10px] font-semibold rounded uppercase tracking-wider text-zinc-500">Firebase</span>
+            <span class="px-2 py-1 bg-zinc-100 text-[10px] font-semibold rounded uppercase tracking-wider text-zinc-500">MySQL</span>
+          </div>
+        </div>
+
+        <!-- Project 3: TUETRA Asset Rental (dark tone) -->
+        <div class="group bg-zinc-900 rounded-2xl p-8 ring-1 ring-white/5 flex flex-col h-full text-white project-card">
+          <div class="mb-6 flex justify-between items-start">
+            <div class="size-10 bg-white/10 rounded-xl grid place-items-center text-white font-bold">Map</div>
+            <span class="text-[10px] font-bold uppercase tracking-widest text-white/40">Logistics</span>
+          </div>
+          <h3 class="text-xl font-medium mb-3">TUETRA Asset Rental</h3>
+          <p class="text-sm text-zinc-400 mb-6 text-pretty">Problem: Fragmented location tracking for rental machinery. Impact: Integrated Google Maps and geofencing for precise real-time asset utilization monitoring across regions.</p>
+          <div class="mt-auto flex flex-wrap gap-2">
+            <span class="px-2 py-1 bg-white/10 text-[10px] font-semibold rounded uppercase tracking-wider text-white/60">Dart</span>
+            <span class="px-2 py-1 bg-white/10 text-[10px] font-semibold rounded uppercase tracking-wider text-white/60">Google Maps</span>
+            <span class="px-2 py-1 bg-white/10 text-[10px] font-semibold rounded uppercase tracking-wider text-white/60">GeoJSON</span>
+          </div>
+        </div>
+
+        <!-- Project 4: Digital Fuel Management (earth) -->
+        <div class="group bg-white rounded-2xl p-8 ring-1 ring-black/5 flex flex-col h-full project-card">
+          <div class="mb-6 flex justify-between items-start">
+            <div class="size-10 bg-brand-earth/10 rounded-xl grid place-items-center font-bold text-brand-earth">Fu</div>
+            <span class="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Operations</span>
+          </div>
+          <h3 class="text-xl font-medium mb-3 text-zinc-900">Digital Fuel Management System</h3>
+          <p class="text-sm text-zinc-600 mb-6 text-pretty">Problem: Untracked fuel consumption and pilferage across fleets. Impact: Built end-to-end digital tracking with reconciliation dashboards, cutting losses for fleet operators.</p>
+          <div class="mt-auto flex flex-wrap gap-2">
+            <span class="px-2 py-1 bg-zinc-100 text-[10px] font-semibold rounded uppercase tracking-wider text-zinc-500">Java</span>
+            <span class="px-2 py-1 bg-zinc-100 text-[10px] font-semibold rounded uppercase tracking-wider text-zinc-500">PostgreSQL</span>
+            <span class="px-2 py-1 bg-zinc-100 text-[10px] font-semibold rounded uppercase tracking-wider text-zinc-500">REST</span>
+          </div>
+        </div>
+
+        <!-- Project 5: Agency Banking Platform (forest) -->
+        <div class="group bg-white rounded-2xl p-8 ring-1 ring-black/5 flex flex-col h-full project-card">
+          <div class="mb-6 flex justify-between items-start">
+            <div class="size-10 bg-brand-forest/10 rounded-xl grid place-items-center font-bold text-brand-forest">BK</div>
+            <span class="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Financial</span>
+          </div>
+          <h3 class="text-xl font-medium mb-3 text-zinc-900">Agency Banking Platform</h3>
+          <p class="text-sm text-zinc-600 mb-6 text-pretty">Problem: Limited financial access in rural hubs. Impact: Built secure middleware for transaction processing in low-bandwidth environments, extending banking to underserved communities.</p>
+          <div class="mt-auto flex flex-wrap gap-2">
+            <span class="px-2 py-1 bg-zinc-100 text-[10px] font-semibold rounded uppercase tracking-wider text-zinc-500">Java</span>
+            <span class="px-2 py-1 bg-zinc-100 text-[10px] font-semibold rounded uppercase tracking-wider text-zinc-500">Security</span>
+            <span class="px-2 py-1 bg-zinc-100 text-[10px] font-semibold rounded uppercase tracking-wider text-zinc-500">APIs</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE + VISION SECTION (dark) -->
+  <section id="experience" class="py-24 bg-zinc-950 text-zinc-400 overflow-hidden relative">
+    <div class="absolute top-0 right-0 w-1/3 h-full kente-pattern opacity-5" aria-hidden></div>
+    <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-20 relative">
+      <!-- LEFT COLUMN: Experience timeline & certifications -->
+      <div>
+        <h2 class="text-white text-sm font-semibold uppercase tracking-widest mb-12">Experience</h2>
+        <div class="space-y-12 border-l border-white/10 pl-8">
+          <!-- Bsystems Limited (active) -->
+          <div class="relative">
+            <div class="absolute -left-[37px] top-1 size-2.5 rounded-full border-4 border-zinc-950 bg-brand-earth"></div>
+            <h4 class="text-white font-medium">Bsystems Limited</h4>
+            <p class="text-xs text-zinc-500 mb-2">Software Engineer • Present</p>
+            <p class="text-sm text-pretty">Architecting scalable enterprise solutions with a focus on core banking, agency banking, and identity verification systems.</p>
+          </div>
+          <!-- BuildSpace (California) -->
+          <div class="relative">
+            <div class="absolute -left-[37px] top-1 size-2.5 rounded-full border-4 border-zinc-950 bg-zinc-700"></div>
+            <h4 class="text-white font-medium">BuildSpace (California)</h4>
+            <p class="text-xs text-zinc-500 mb-2">AI Workflow Internship</p>
+            <p class="text-sm text-pretty">Engineered automated AI agent workflows to optimize repetitive developer tasks and accelerate product iteration cycles.</p>
+          </div>
+          <!-- Trestle Academy Ghana -->
+          <div class="relative">
+            <div class="absolute -left-[37px] top-1 size-2.5 rounded-full border-4 border-zinc-950 bg-zinc-700"></div>
+            <h4 class="text-white font-medium">Trestle Academy Ghana</h4>
+            <p class="text-xs text-zinc-500 mb-2">Hackathon Team Lead</p>
+            <p class="text-sm text-pretty">Led cross-functional teams to ship rapid prototypes for social impact, including a hackathon-winning solution.</p>
+          </div>
+        </div>
+
+        <!-- Certifications -->
+        <div class="mt-16">
+          <h3 class="text-white text-sm font-semibold uppercase tracking-widest mb-6">Certifications</h3>
+          <ul class="flex flex-wrap gap-2">
+            <li class="px-3 py-1.5 bg-white/5 border border-white/10 rounded-full text-xs text-zinc-300">AWS Solutions Architect</li>
+            <li class="px-3 py-1.5 bg-white/5 border border-white/10 rounded-full text-xs text-zinc-300">Cisco CyberOps Associate</li>
+            <li class="px-3 py-1.5 bg-white/5 border border-white/10 rounded-full text-xs text-zinc-300">DevOps Certification</li>
+            <li class="px-3 py-1.5 bg-white/5 border border-white/10 rounded-full text-xs text-zinc-300">ALX Software Engineering</li>
+            <li class="px-3 py-1.5 bg-white/5 border border-white/10 rounded-full text-xs text-zinc-300">Agile and Information Management</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN: Vision & community blocks -->
+      <div>
+        <h2 class="text-white text-sm font-semibold uppercase tracking-widest mb-12">Vision</h2>
+        <div class="bg-zinc-900/50 p-10 rounded-3xl border border-white/5">
+          <p class="text-2xl font-serif-custom italic text-white leading-tight mb-8">"Building technology that scales across Africa, improves financial inclusion, and strengthens secure digital infrastructure."</p>
+          <div class="grid grid-cols-2 gap-6">
+            <div class="p-4 bg-zinc-800/50 rounded-xl">
+              <span class="text-[10px] font-bold uppercase text-zinc-500 block mb-2">Leadership</span>
+              <p class="text-xs text-white/80">Junior Common Room Organizer @ UPSA</p>
+            </div>
+            <div class="p-4 bg-zinc-800/50 rounded-xl">
+              <span class="text-[10px] font-bold uppercase text-zinc-500 block mb-2">Mentorship</span>
+              <p class="text-xs text-white/80">Pathfinder Africa mentor</p>
+            </div>
+            <div class="p-4 bg-zinc-800/50 rounded-xl">
+              <span class="text-[10px] font-bold uppercase text-zinc-500 block mb-2">Community</span>
+              <p class="text-xs text-white/80">DevFest &amp; Ghana Innovation circles</p>
+            </div>
+            <div class="p-4 bg-zinc-800/50 rounded-xl">
+              <span class="text-[10px] font-bold uppercase text-zinc-500 block mb-2">Global</span>
+              <p class="text-xs text-white/80">Microsoft Build 2024 participant</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER / CONTACT SECTION -->
+  <footer id="contact" class="py-24 border-t border-zinc-200">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="flex flex-col md:flex-row justify-between items-start gap-12">
+        <div class="max-w-[40ch]">
+          <h2 class="text-3xl font-medium tracking-tight mb-4 text-zinc-900">Ready to build?</h2>
+          <p class="text-zinc-600 mb-8">Open for collaborations on high-impact systems, security research, and AI infrastructure.</p>
+          <a href="mailto:p.amoako2002@gmail.com" class="text-xl font-medium text-brand-earth hover:underline underline-offset-8 decoration-brand-earth/30">p.amoako2002@gmail.com</a>
+        </div>
+        <div class="flex gap-12">
+          <div class="space-y-4">
+            <span class="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Socials</span>
+            <ul class="text-sm font-medium space-y-2">
+              <li><a href="https://linkedin.com/in/perry-amoako" target="_blank" rel="noreferrer" class="hover:text-brand-earth transition-colors">LinkedIn</a></li>
+              <li><a href="https://github.com/kwapee" target="_blank" rel="noreferrer" class="hover:text-brand-earth transition-colors">GitHub</a></li>
+            </ul>
+          </div>
+          <div class="space-y-4">
+            <span class="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Identity</span>
+            <ul class="text-sm font-medium space-y-2">
+              <li class="text-zinc-600">AWS Solutions Architect</li>
+              <li class="text-zinc-600">Cisco CyberOps Associate</li>
+              <li class="text-zinc-600">ALX Software Engineering</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="mt-24 pt-8 border-t border-zinc-100 flex justify-between items-center text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-400">
+        <span>© 2026 Perry Kwabena Amoako</span>
+        <span>Accra, Ghana — Global</span>
+      </div>
     </div>
   </footer>
 
+  <!-- tiny interaction for anchor smoothness (already smooth) + optional console -->
   <script>
-    // Menu Toggle
-    let menuBtn = document.querySelector(".menu-toggle");
-    let navMenu = document.querySelector("nav");
-
-    menuBtn.addEventListener("click", () => {
-      if (!navMenu.classList.contains("open")) {
-        navMenu.classList.add("open");
-        menuBtn.classList.remove("lni-menu");
-        menuBtn.classList.add("lni-close");
-      } else {
-        navMenu.classList.remove("open");
-        menuBtn.classList.remove("lni-close");
-        menuBtn.classList.add("lni-menu");
-      }
+    // ensure any external links in nav work perfectly & fix any mobile backdrop
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const targetId = this.getAttribute('href');
+        if(targetId === "#" || targetId === "") return;
+        const targetElement = document.querySelector(targetId);
+        if(targetElement) {
+          e.preventDefault();
+          targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
     });
-
-    let logo = document.querySelector(".logo");
-
-    let themeBtn = document.querySelector(".theme-toggle");
-
-    themeBtn.addEventListener("click", () => {
-      if (!document.body.classList.contains("light")) {
-        document.body.classList.add("light");
-        logo.src = "assests/kwapee-dark-min.png";
-        localStorage.setItem("theme", "light");
-      } else {
-        document.body.classList.remove("light");
-        logo.src = "assests/kwapee-light.png";
-        localStorage.removeItem("theme");
-      }
-    });
-
-    theme = localStorage.getItem("theme");
-    if (theme) {
-      document.body.classList.add("light");
-      logo.src = "assests/kwapee-dark-min.png";
-      localStorage.setItem("theme", "light");
-    }
   </script>
 </body>
-
 </html>
