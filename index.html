@@ -1,96 +1,240 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Perry Kwabena Amoako — Software Engineer & AI Builder</title>
-  <meta name="description" content="Portfolio of Perry Kwabena Amoako, a Ghanaian software engineer building secure, scalable, AI-driven systems for Africa and beyond." />
-  
+  <meta name="description"
+    content="Portfolio of Perry Kwabena Amoako, a Ghanaian software engineer building secure, scalable, AI-driven systems for Africa and beyond." />
+
   <!-- Preconnect & Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Instrument+Serif&display=swap" rel="stylesheet" />
-  
+  <link
+    href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Instrument+Serif&display=swap"
+    rel="stylesheet" />
+
   <!-- Tailwind CSS v3 + basic config (CDN) -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Custom overrides & brand theme (must come after Tailwind) -->
+
   <style>
     /* ---------- DESIGN SYSTEM : brand colors & kente pattern ---------- */
     :root {
-      --brand-earth: #b87b4a;    /* earthy terracotta */
-      --brand-forest: #2f6b47;   /* deep forest green */
+      --brand-earth: #b87b4a;
+      --brand-forest: #2f6b47;
       --brand-earth-rgb: 184, 123, 74;
       --brand-forest-rgb: 47, 107, 71;
     }
-    
-    /* custom utility classes for brand colors (opacity variants) */
-    .bg-brand-earth { background-color: var(--brand-earth); }
-    .text-brand-earth { color: var(--brand-earth); }
-    .bg-brand-earth\/10 { background-color: rgba(var(--brand-earth-rgb), 0.1); }
-    .border-brand-earth\/20 { border-color: rgba(var(--brand-earth-rgb), 0.2); }
-    
-    .bg-brand-forest { background-color: var(--brand-forest); }
-    .text-brand-forest { color: var(--brand-forest); }
-    .bg-brand-forest\/10 { background-color: rgba(var(--brand-forest-rgb), 0.1); }
-    
-    /* Kente-inspired pattern (subtle woven texture) */
+
+    .bg-brand-earth {
+      background-color: var(--brand-earth);
+    }
+
+    .text-brand-earth {
+      color: var(--brand-earth);
+    }
+
+    .bg-brand-earth\/10 {
+      background-color: rgba(var(--brand-earth-rgb), 0.1);
+    }
+
+    .border-brand-earth\/20 {
+      border-color: rgba(var(--brand-earth-rgb), 0.2);
+    }
+
+    .bg-brand-forest {
+      background-color: var(--brand-forest);
+    }
+
+    .text-brand-forest {
+      color: var(--brand-forest);
+    }
+
+    .bg-brand-forest\/10 {
+      background-color: rgba(var(--brand-forest-rgb), 0.1);
+    }
+
     .kente-pattern {
-      background-image: repeating-linear-gradient(45deg, rgba(0,0,0,0.02) 0px, rgba(0,0,0,0.02) 2px, transparent 2px, transparent 8px),
-                        repeating-linear-gradient(135deg, rgba(0,0,0,0.01) 0px, rgba(0,0,0,0.01) 2px, transparent 2px, transparent 8px);
+      background-image: repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.02) 0px, rgba(0, 0, 0, 0.02) 2px, transparent 2px, transparent 8px),
+        repeating-linear-gradient(135deg, rgba(0, 0, 0, 0.01) 0px, rgba(0, 0, 0, 0.01) 2px, transparent 2px, transparent 8px);
       pointer-events: none;
     }
-    .dark .kente-pattern {
-      background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 8px),
-                        repeating-linear-gradient(135deg, rgba(255,255,255,0.01) 0px, rgba(255,255,255,0.01) 2px, transparent 2px, transparent 8px);
-    }
-    
-    /* smooth scroll behavior */
+
     html {
       scroll-behavior: smooth;
     }
-    
-    /* custom font overrides & default body */
+
     body {
       font-family: 'Instrument Sans', system-ui, -apple-system, sans-serif;
       background-color: #fafaf9;
     }
+
     .font-serif-custom {
       font-family: 'Instrument Serif', serif;
     }
-    
-    /* timeline dot styling for experience */
-    .timeline-dot-active {
-      background-color: var(--brand-earth);
-      box-shadow: 0 0 0 4px #18181b;
-    }
-    .timeline-dot-inactive {
-      background-color: #3f3f46;
-      box-shadow: 0 0 0 4px #18181b;
-    }
-    
-    /* force card transitions (optional) */
+
     .project-card {
       transition: transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: pointer;
     }
+
     .project-card:hover {
-      transform: translateY(-4px);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
     }
-    
-    /* custom ring/border helpers */
-    .ring-black\/5 {
-      --tw-ring-opacity: 0.05;
-      box-shadow: 0 0 0 1px rgba(0,0,0,0.05);
+
+    /* Modal Styles */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background-color: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+      padding: 1rem;
     }
-    .ring-white\/5 {
-      box-shadow: 0 0 0 1px rgba(255,255,255,0.05);
+
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
     }
-    
-    /* hide scrollbar for cleaner look (optional) */
-    .no-scrollbar::-webkit-scrollbar {
-      display: none;
+
+    .modal-content {
+      background-color: #ffffff;
+      border-radius: 1.5rem;
+      max-width: 56rem;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 2rem;
+      position: relative;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      transform: scale(0.95);
+      transition: transform 0.3s ease;
+    }
+
+    .modal-overlay.active .modal-content {
+      transform: scale(1);
+    }
+
+    .modal-close {
+      position: sticky;
+      top: 0;
+      float: right;
+      background: #f1f5f9;
+      border: none;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 9999px;
+      font-size: 1.5rem;
+      line-height: 1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #1e293b;
+      transition: background 0.2s;
+      margin-bottom: 1rem;
+      z-index: 10;
+    }
+
+    .modal-close:hover {
+      background: #e2e8f0;
+    }
+
+    .modal-content h4 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #0f172a;
+      margin-top: 1.5rem;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.01em;
+    }
+
+    .modal-content h4:first-of-type {
+      margin-top: 0;
+    }
+
+    .modal-content p {
+      color: #334155;
+      line-height: 1.7;
+      margin-bottom: 0.75rem;
+    }
+
+    .modal-content ul,
+    .modal-content ol {
+      padding-left: 1.5rem;
+      color: #334155;
+      line-height: 1.7;
+      margin-bottom: 0.75rem;
+    }
+
+    .modal-content li {
+      margin-bottom: 0.25rem;
+    }
+
+    .modal-content strong {
+      color: #0f172a;
+      font-weight: 600;
+    }
+
+    .modal-content hr {
+      margin: 1.5rem 0;
+      border: 0;
+      border-top: 1px solid #e2e8f0;
+    }
+
+    /* Demo link button */
+    .demo-link-wrapper {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 2px solid #e2e8f0;
+      text-align: center;
+    }
+
+    .demo-link-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background-color: var(--brand-earth);
+      color: #fff;
+      padding: 0.75rem 2rem;
+      border-radius: 9999px;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: background 0.2s, transform 0.1s;
+      text-decoration: none;
+    }
+
+    .demo-link-btn:hover {
+      background-color: #a0673a;
+      transform: scale(1.02);
+    }
+
+    .demo-link-btn i {
+      font-size: 1.2rem;
+    }
+
+    @media (max-width: 640px) {
+      .modal-content {
+        padding: 1.25rem;
+        max-height: 95vh;
+      }
+
+      .modal-close {
+        top: 0.5rem;
+        right: 0.5rem;
+      }
     }
   </style>
 </head>
+
 <body class="bg-zinc-50 text-zinc-900 antialiased selection:bg-brand-earth/20">
 
   <!-- FIXED NAVIGATION -->
@@ -110,19 +254,25 @@
     <div class="absolute inset-0 kente-pattern" aria-hidden></div>
     <div class="max-w-6xl mx-auto px-6 relative">
       <div class="max-w-[65ch]">
-        <p class="text-xs font-bold uppercase tracking-[0.3em] text-brand-earth mb-6">Software Engineer • Accra, Ghana</p>
-        <h1 class="text-4xl md:text-6xl font-medium tracking-tight leading-tight text-balance text-zinc-950 mb-6">Perry Kwabena Amoako</h1>
-        <p class="text-xl md:text-2xl text-zinc-600 font-serif-custom italic mb-8">Software Engineer | AI &amp; Scalable Systems Builder</p>
+        <p class="text-xs font-bold uppercase tracking-[0.3em] text-brand-earth mb-6">Software Engineer • Accra, Ghana
+        </p>
+        <h1 class="text-4xl md:text-6xl font-medium tracking-tight leading-tight text-balance text-zinc-950 mb-6">Perry
+          Kwabena Amoako</h1>
+        <p class="text-xl md:text-2xl text-zinc-600 font-serif-custom italic mb-8">Software Engineer | AI &amp; Scalable
+          Systems Builder</p>
         <p class="text-lg text-zinc-600 leading-relaxed text-pretty max-w-[56ch] mb-10">
           Building secure, scalable, and impact-driven technology for Africa and beyond bridging
           the gap between advanced computation and real-world utility.
         </p>
         <div class="flex flex-wrap gap-4">
-          <a href="#projects" class="bg-zinc-900 text-zinc-50 px-6 py-2.5 rounded-full text-sm font-medium ring-1 ring-zinc-900 hover:bg-zinc-800 transition-colors flex items-center gap-2">
+          <a href="#projects"
+            class="bg-zinc-900 text-zinc-50 px-6 py-2.5 rounded-full text-sm font-medium ring-1 ring-zinc-900 hover:bg-zinc-800 transition-colors flex items-center gap-2">
             View Projects
             <span class="size-1.5 rounded-full bg-brand-earth"></span>
           </a>
-          <a href="#contact" class="bg-zinc-100 text-zinc-900 px-6 py-2.5 rounded-full text-sm font-medium ring-1 ring-black/5 hover:bg-zinc-200 transition-colors">Contact Me</a>
+          <a href="#contact"
+            class="bg-zinc-100 text-zinc-900 px-6 py-2.5 rounded-full text-sm font-medium ring-1 ring-black/5 hover:bg-zinc-200 transition-colors">Contact
+            Me</a>
         </div>
       </div>
     </div>
@@ -137,8 +287,12 @@
       </div>
       <div class="lg:col-span-8">
         <div class="space-y-6 text-zinc-600 text-pretty max-w-[56ch]">
-          <p>A BSc Information Technology Management graduate from UPSA (2024), my journey is defined by a deep-seated passion for AI-driven identity systems, cybersecurity, fintech, and public-sector innovation. Technology shouldn't just exist, it should solve.</p>
-          <p>Whether it's architecting AI workflows at BuildSpace, leading a hackathon-winning team at Trestle Academy, or shipping secure banking infrastructure at Bsystems, my focus stays constant: scalability, security, and human-centered design.</p>
+          <p>A BSc Information Technology Management graduate from UPSA (2024), my journey is defined by a deep-seated
+            passion for AI-driven identity systems, cybersecurity, fintech, and public-sector innovation. Technology
+            shouldn't just exist, it should solve.</p>
+          <p>Whether it's architecting AI workflows at BuildSpace, leading a hackathon-winning team at Trestle Academy,
+            or shipping secure banking infrastructure at Bsystems, my focus stays constant: scalability, security, and
+            human-centered design.</p>
         </div>
       </div>
     </div>
@@ -148,40 +302,47 @@
   <section class="py-24 bg-zinc-100/50">
     <div class="max-w-6xl mx-auto px-6">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-12">
-        <!-- Programming -->
         <div>
           <h3 class="text-xs font-semibold uppercase tracking-wider text-zinc-400 mb-6">Programming</h3>
           <ul class="space-y-3 text-sm font-medium text-zinc-700">
             <li class="flex items-center gap-2"><span class="size-1 bg-brand-earth rounded-full"></span> Python</li>
-            <li class="flex items-center gap-2"><span class="size-1 bg-brand-earth rounded-full"></span> Dart / Flutter</li>
-            <li class="flex items-center gap-2"><span class="size-1 bg-brand-earth rounded-full"></span> Java / SpringBoot</li>
+            <li class="flex items-center gap-2"><span class="size-1 bg-brand-earth rounded-full"></span> Dart / Flutter
+            </li>
+            <li class="flex items-center gap-2"><span class="size-1 bg-brand-earth rounded-full"></span> Java /
+              SpringBoot</li>
           </ul>
         </div>
-        <!-- Cloud & Data -->
         <div>
           <h3 class="text-xs font-semibold uppercase tracking-wider text-zinc-400 mb-6">Cloud & Data</h3>
           <ul class="space-y-3 text-sm font-medium text-zinc-700">
-            <li class="flex items-center gap-2"><span class="size-1 bg-brand-earth rounded-full"></span> AWS Architecture</li>
-            <li class="flex items-center gap-2"><span class="size-1 bg-brand-earth rounded-full"></span> PostgreSQL / Firebase</li>
-            <li class="flex items-center gap-2"><span class="size-1 bg-brand-earth rounded-full"></span> REST & GraphQL</li>
+            <li class="flex items-center gap-2"><span class="size-1 bg-brand-earth rounded-full"></span> AWS
+              Architecture</li>
+            <li class="flex items-center gap-2"><span class="size-1 bg-brand-earth rounded-full"></span> PostgreSQL /
+              Firebase</li>
+            <li class="flex items-center gap-2"><span class="size-1 bg-brand-earth rounded-full"></span> REST & GraphQL
+            </li>
           </ul>
         </div>
-        <!-- Intelligence -->
         <div>
           <h3 class="text-xs font-semibold uppercase tracking-wider text-zinc-400 mb-6">Intelligence</h3>
           <ul class="space-y-3 text-sm font-medium text-zinc-700">
-            <li class="flex items-center gap-2"><span class="size-1 bg-brand-earth rounded-full"></span> Computer Vision</li>
-            <li class="flex items-center gap-2"><span class="size-1 bg-brand-earth rounded-full"></span> OpenCV / ML</li>
-            <li class="flex items-center gap-2"><span class="size-1 bg-brand-earth rounded-full"></span> AI Workflows</li>
+            <li class="flex items-center gap-2"><span class="size-1 bg-brand-earth rounded-full"></span> Computer Vision
+            </li>
+            <li class="flex items-center gap-2"><span class="size-1 bg-brand-earth rounded-full"></span> OpenCV / ML
+            </li>
+            <li class="flex items-center gap-2"><span class="size-1 bg-brand-earth rounded-full"></span> AI Workflows
+            </li>
           </ul>
         </div>
-        <!-- Security -->
         <div>
           <h3 class="text-xs font-semibold uppercase tracking-wider text-zinc-400 mb-6">Security</h3>
           <ul class="space-y-3 text-sm font-medium text-zinc-700">
-            <li class="flex items-center gap-2"><span class="size-1 bg-brand-earth rounded-full"></span> CyberOps Associate</li>
-            <li class="flex items-center gap-2"><span class="size-1 bg-brand-earth rounded-full"></span> IAM Systems</li>
-            <li class="flex items-center gap-2"><span class="size-1 bg-brand-earth rounded-full"></span> Secure App Dev</li>
+            <li class="flex items-center gap-2"><span class="size-1 bg-brand-earth rounded-full"></span> CyberOps
+              Associate</li>
+            <li class="flex items-center gap-2"><span class="size-1 bg-brand-earth rounded-full"></span> IAM Systems
+            </li>
+            <li class="flex items-center gap-2"><span class="size-1 bg-brand-earth rounded-full"></span> Secure App Dev
+            </li>
           </ul>
         </div>
       </div>
@@ -193,84 +354,10 @@
     <div class="max-w-6xl mx-auto px-6">
       <div class="mb-16">
         <h2 class="text-3xl font-medium tracking-tight text-zinc-900 mb-4">Featured Engineering Work</h2>
-        <p class="text-zinc-500 max-w-[56ch]">Case studies in scalability, automated intelligence, and financial infrastructure.</p>
+        <p class="text-zinc-500 max-w-[56ch]">Click on any project to view the full case study documentation.</p>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        
-        <!-- Project 1: Facial Recognition (earth) -->
-        <div class="group bg-white rounded-2xl p-8 ring-1 ring-black/5 flex flex-col h-full project-card">
-          <div class="mb-6 flex justify-between items-start">
-            <div class="size-10 bg-brand-earth/10 rounded-xl grid place-items-center font-bold text-brand-earth">AI</div>
-            <span class="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Identity</span>
-          </div>
-          <h3 class="text-xl font-medium mb-3 text-zinc-900">Facial Recognition Attendance</h3>
-          <p class="text-sm text-zinc-600 mb-6 text-pretty">Problem: Manual tracking inefficiencies in high-traffic environments. Impact: Reduced processing time by 85% using OpenCV and Machine Learning for real-time biometric verification.</p>
-          <div class="mt-auto flex flex-wrap gap-2">
-            <span class="px-2 py-1 bg-zinc-100 text-[10px] font-semibold rounded uppercase tracking-wider text-zinc-500">Python</span>
-            <span class="px-2 py-1 bg-zinc-100 text-[10px] font-semibold rounded uppercase tracking-wider text-zinc-500">OpenCV</span>
-            <span class="px-2 py-1 bg-zinc-100 text-[10px] font-semibold rounded uppercase tracking-wider text-zinc-500">ML</span>
-          </div>
-        </div>
-
-        <!-- Project 2: Revenue Mobilization (forest) -->
-        <div class="group bg-white rounded-2xl p-8 ring-1 ring-black/5 flex flex-col h-full project-card">
-          <div class="mb-6 flex justify-between items-start">
-            <div class="size-10 bg-brand-forest/10 rounded-xl grid place-items-center font-bold text-brand-forest">Fin</div>
-            <span class="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Fintech</span>
-          </div>
-          <h3 class="text-xl font-medium mb-3 text-zinc-900">Revenue Mobilization Platform</h3>
-          <p class="text-sm text-zinc-600 mb-6 text-pretty">Problem: Leakages in informal sector revenue collection. Impact: Digitized collection for 2k+ users on Flutter and Firebase, increasing transparency and auditability by 40%.</p>
-          <div class="mt-auto flex flex-wrap gap-2">
-            <span class="px-2 py-1 bg-zinc-100 text-[10px] font-semibold rounded uppercase tracking-wider text-zinc-500">Flutter</span>
-            <span class="px-2 py-1 bg-zinc-100 text-[10px] font-semibold rounded uppercase tracking-wider text-zinc-500">Firebase</span>
-            <span class="px-2 py-1 bg-zinc-100 text-[10px] font-semibold rounded uppercase tracking-wider text-zinc-500">MySQL</span>
-          </div>
-        </div>
-
-        <!-- Project 3: TUETRA Asset Rental (dark tone) -->
-        <div class="group bg-zinc-900 rounded-2xl p-8 ring-1 ring-white/5 flex flex-col h-full text-white project-card">
-          <div class="mb-6 flex justify-between items-start">
-            <div class="size-10 bg-white/10 rounded-xl grid place-items-center text-white font-bold">Map</div>
-            <span class="text-[10px] font-bold uppercase tracking-widest text-white/40">Logistics</span>
-          </div>
-          <h3 class="text-xl font-medium mb-3">TUETRA Asset Rental</h3>
-          <p class="text-sm text-zinc-400 mb-6 text-pretty">Problem: Fragmented location tracking for rental machinery. Impact: Integrated Google Maps and geofencing for precise real-time asset utilization monitoring across regions.</p>
-          <div class="mt-auto flex flex-wrap gap-2">
-            <span class="px-2 py-1 bg-white/10 text-[10px] font-semibold rounded uppercase tracking-wider text-white/60">Dart</span>
-            <span class="px-2 py-1 bg-white/10 text-[10px] font-semibold rounded uppercase tracking-wider text-white/60">Google Maps</span>
-            <span class="px-2 py-1 bg-white/10 text-[10px] font-semibold rounded uppercase tracking-wider text-white/60">GeoJSON</span>
-          </div>
-        </div>
-
-        <!-- Project 4: Digital Fuel Management (earth) -->
-        <div class="group bg-white rounded-2xl p-8 ring-1 ring-black/5 flex flex-col h-full project-card">
-          <div class="mb-6 flex justify-between items-start">
-            <div class="size-10 bg-brand-earth/10 rounded-xl grid place-items-center font-bold text-brand-earth">Fu</div>
-            <span class="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Operations</span>
-          </div>
-          <h3 class="text-xl font-medium mb-3 text-zinc-900">Digital Fuel Management System</h3>
-          <p class="text-sm text-zinc-600 mb-6 text-pretty">Problem: Untracked fuel consumption and pilferage across fleets. Impact: Built end-to-end digital tracking with reconciliation dashboards, cutting losses for fleet operators.</p>
-          <div class="mt-auto flex flex-wrap gap-2">
-            <span class="px-2 py-1 bg-zinc-100 text-[10px] font-semibold rounded uppercase tracking-wider text-zinc-500">Java</span>
-            <span class="px-2 py-1 bg-zinc-100 text-[10px] font-semibold rounded uppercase tracking-wider text-zinc-500">PostgreSQL</span>
-            <span class="px-2 py-1 bg-zinc-100 text-[10px] font-semibold rounded uppercase tracking-wider text-zinc-500">REST</span>
-          </div>
-        </div>
-
-        <!-- Project 5: Agency Banking Platform (forest) -->
-        <div class="group bg-white rounded-2xl p-8 ring-1 ring-black/5 flex flex-col h-full project-card">
-          <div class="mb-6 flex justify-between items-start">
-            <div class="size-10 bg-brand-forest/10 rounded-xl grid place-items-center font-bold text-brand-forest">BK</div>
-            <span class="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Financial</span>
-          </div>
-          <h3 class="text-xl font-medium mb-3 text-zinc-900">Agency Banking Platform</h3>
-          <p class="text-sm text-zinc-600 mb-6 text-pretty">Problem: Limited financial access in rural hubs. Impact: Built secure middleware for transaction processing in low-bandwidth environments, extending banking to underserved communities.</p>
-          <div class="mt-auto flex flex-wrap gap-2">
-            <span class="px-2 py-1 bg-zinc-100 text-[10px] font-semibold rounded uppercase tracking-wider text-zinc-500">Java</span>
-            <span class="px-2 py-1 bg-zinc-100 text-[10px] font-semibold rounded uppercase tracking-wider text-zinc-500">Security</span>
-            <span class="px-2 py-1 bg-zinc-100 text-[10px] font-semibold rounded uppercase tracking-wider text-zinc-500">APIs</span>
-          </div>
-        </div>
+      <div id="projectGrid" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Cards will be injected here by JavaScript -->
       </div>
     </div>
   </section>
@@ -279,51 +366,53 @@
   <section id="experience" class="py-24 bg-zinc-950 text-zinc-400 overflow-hidden relative">
     <div class="absolute top-0 right-0 w-1/3 h-full kente-pattern opacity-5" aria-hidden></div>
     <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-20 relative">
-      <!-- LEFT COLUMN: Experience timeline & certifications -->
       <div>
         <h2 class="text-white text-sm font-semibold uppercase tracking-widest mb-12">Experience</h2>
         <div class="space-y-12 border-l border-white/10 pl-8">
-          <!-- Bsystems Limited (active) -->
           <div class="relative">
-            <div class="absolute -left-[37px] top-1 size-2.5 rounded-full border-4 border-zinc-950 bg-brand-earth"></div>
+            <div class="absolute -left-[37px] top-1 size-2.5 rounded-full border-4 border-zinc-950 bg-brand-earth">
+            </div>
             <h4 class="text-white font-medium">Bsystems Limited</h4>
             <p class="text-xs text-zinc-500 mb-2">Software Engineer • Present</p>
-            <p class="text-sm text-pretty">Architecting scalable enterprise solutions with a focus on core banking, agency banking, and identity verification systems.</p>
+            <p class="text-sm text-pretty">Architecting scalable enterprise solutions with a focus on core banking,
+              agency banking, and identity verification systems.</p>
           </div>
-          <!-- BuildSpace (California) -->
           <div class="relative">
             <div class="absolute -left-[37px] top-1 size-2.5 rounded-full border-4 border-zinc-950 bg-zinc-700"></div>
             <h4 class="text-white font-medium">BuildSpace (California)</h4>
             <p class="text-xs text-zinc-500 mb-2">AI Workflow Internship</p>
-            <p class="text-sm text-pretty">Engineered automated AI agent workflows to optimize repetitive developer tasks and accelerate product iteration cycles.</p>
+            <p class="text-sm text-pretty">Engineered automated AI agent workflows to optimize repetitive developer
+              tasks and accelerate product iteration cycles.</p>
           </div>
-          <!-- Trestle Academy Ghana -->
           <div class="relative">
             <div class="absolute -left-[37px] top-1 size-2.5 rounded-full border-4 border-zinc-950 bg-zinc-700"></div>
             <h4 class="text-white font-medium">Trestle Academy Ghana</h4>
             <p class="text-xs text-zinc-500 mb-2">Hackathon Team Lead</p>
-            <p class="text-sm text-pretty">Led cross-functional teams to ship rapid prototypes for social impact, including a hackathon-winning solution.</p>
+            <p class="text-sm text-pretty">Led cross-functional teams to ship rapid prototypes for social impact,
+              including a hackathon-winning solution.</p>
           </div>
         </div>
-
-        <!-- Certifications -->
         <div class="mt-16">
           <h3 class="text-white text-sm font-semibold uppercase tracking-widest mb-6">Certifications</h3>
           <ul class="flex flex-wrap gap-2">
-            <li class="px-3 py-1.5 bg-white/5 border border-white/10 rounded-full text-xs text-zinc-300">AWS Solutions Architect</li>
-            <li class="px-3 py-1.5 bg-white/5 border border-white/10 rounded-full text-xs text-zinc-300">Cisco CyberOps Associate</li>
-            <li class="px-3 py-1.5 bg-white/5 border border-white/10 rounded-full text-xs text-zinc-300">DevOps Certification</li>
-            <li class="px-3 py-1.5 bg-white/5 border border-white/10 rounded-full text-xs text-zinc-300">ALX Software Engineering</li>
-            <li class="px-3 py-1.5 bg-white/5 border border-white/10 rounded-full text-xs text-zinc-300">Agile and Information Management</li>
+            <li class="px-3 py-1.5 bg-white/5 border border-white/10 rounded-full text-xs text-zinc-300">AWS Solutions
+              Architect</li>
+            <li class="px-3 py-1.5 bg-white/5 border border-white/10 rounded-full text-xs text-zinc-300">Cisco CyberOps
+              Associate</li>
+            <li class="px-3 py-1.5 bg-white/5 border border-white/10 rounded-full text-xs text-zinc-300">DevOps
+              Certification</li>
+            <li class="px-3 py-1.5 bg-white/5 border border-white/10 rounded-full text-xs text-zinc-300">ALX Software
+              Engineering</li>
+            <li class="px-3 py-1.5 bg-white/5 border border-white/10 rounded-full text-xs text-zinc-300">Agile and
+              Information Management</li>
           </ul>
         </div>
       </div>
-
-      <!-- RIGHT COLUMN: Vision & community blocks -->
       <div>
         <h2 class="text-white text-sm font-semibold uppercase tracking-widest mb-12">Vision</h2>
         <div class="bg-zinc-900/50 p-10 rounded-3xl border border-white/5">
-          <p class="text-2xl font-serif-custom italic text-white leading-tight mb-8">"Building technology that scales across Africa, improves financial inclusion, and strengthens secure digital infrastructure."</p>
+          <p class="text-2xl font-serif-custom italic text-white leading-tight mb-8">"Building technology that scales
+            across Africa, improves financial inclusion, and strengthens secure digital infrastructure."</p>
           <div class="grid grid-cols-2 gap-6">
             <div class="p-4 bg-zinc-800/50 rounded-xl">
               <span class="text-[10px] font-bold uppercase text-zinc-500 block mb-2">Leadership</span>
@@ -353,15 +442,19 @@
       <div class="flex flex-col md:flex-row justify-between items-start gap-12">
         <div class="max-w-[40ch]">
           <h2 class="text-3xl font-medium tracking-tight mb-4 text-zinc-900">Ready to build?</h2>
-          <p class="text-zinc-600 mb-8">Open for collaborations on high-impact systems, security research, and AI infrastructure.</p>
-          <a href="mailto:p.amoako2002@gmail.com" class="text-xl font-medium text-brand-earth hover:underline underline-offset-8 decoration-brand-earth/30">p.amoako2002@gmail.com</a>
+          <p class="text-zinc-600 mb-8">Open for collaborations on high-impact systems, security research, and AI
+            infrastructure.</p>
+          <a href="mailto:p.amoako2002@gmail.com"
+            class="text-xl font-medium text-brand-earth hover:underline underline-offset-8 decoration-brand-earth/30">p.amoako2002@gmail.com</a>
         </div>
         <div class="flex gap-12">
           <div class="space-y-4">
             <span class="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Socials</span>
             <ul class="text-sm font-medium space-y-2">
-              <li><a href="https://linkedin.com/in/perry-amoako" target="_blank" rel="noreferrer" class="hover:text-brand-earth transition-colors">LinkedIn</a></li>
-              <li><a href="https://github.com/kwapee" target="_blank" rel="noreferrer" class="hover:text-brand-earth transition-colors">GitHub</a></li>
+              <li><a href="https://linkedin.com/in/perry-amoako" target="_blank" rel="noreferrer"
+                  class="hover:text-brand-earth transition-colors">LinkedIn</a></li>
+              <li><a href="https://github.com/kwapee" target="_blank" rel="noreferrer"
+                  class="hover:text-brand-earth transition-colors">GitHub</a></li>
             </ul>
           </div>
           <div class="space-y-4">
@@ -374,22 +467,682 @@
           </div>
         </div>
       </div>
-      <div class="mt-24 pt-8 border-t border-zinc-100 flex justify-between items-center text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-400">
+      <div
+        class="mt-24 pt-8 border-t border-zinc-100 flex justify-between items-center text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-400">
         <span>© 2026 Perry Kwabena Amoako</span>
         <span>Accra, Ghana — Global</span>
       </div>
     </div>
   </footer>
 
-  <!-- tiny interaction for anchor smoothness (already smooth) + optional console -->
+  <!-- PROJECT MODAL -->
+  <div id="projectModal" class="modal-overlay" role="dialog" aria-modal="true">
+    <div class="modal-content">
+      <button class="modal-close" id="modalCloseBtn" aria-label="Close modal">✕</button>
+      <div id="modalBody">
+        <!-- Dynamic content injected here -->
+      </div>
+      <!-- Demo link will be appended here if available -->
+      <div id="demoLinkContainer" class="demo-link-wrapper" style="display:none;">
+        <a href="#" target="_blank" rel="noopener noreferrer" class="demo-link-btn" id="demoLinkBtn">
+          <span>▶</span> View Demo
+        </a>
+      </div>
+    </div>
+  </div>
+
   <script>
-    // ensure any external links in nav work perfectly & fix any mobile backdrop
+    // ------------------------------------------------------------
+    // 1. PROJECT DATA (with full documentation & demoLink)
+    // ------------------------------------------------------------
+    const projects = [
+      {
+        id: 'facial',
+        initials: 'FR',
+        category: 'AI / Identity',
+        title: 'Facial Recognition Attendance System',
+        tone: 'forest',
+        tags: ['Python', 'OpenCV', 'Flutter'],
+        short: 'AI-powered attendance system using facial recognition for accurate, real-time student identification.',
+        demoLink: 'https://drive.google.com/file/d/1w075-m5X3Egx0t7B-z6vcNNVZzc-Enl9/view?usp=sharing', // <-- Add your Google Drive link here
+        long: `
+          <h4>1. Problem Context</h4>
+          <p>Traditional attendance systems are prone to inefficiencies, proxy attendance, and time wastage. Institutions require a <strong>secure, automated, and contactless solution</strong> to ensure accurate attendance tracking. This system eliminates impersonation and significantly improves efficiency in attendance recording.</p>
+
+          <h4>2. Objective</h4>
+          <p>To design and implement an <strong>AI-powered attendance system</strong> that uses facial recognition for accurate, real-time student identification and attendance logging.</p>
+
+          <h4>3. System Overview</h4>
+          <ul>
+            <li><strong>Platform:</strong> Mobile + Web-integrated system</li>
+            <li><strong>Mobile Layer:</strong> Flutter (interface and interaction)</li>
+            <li><strong>Backend:</strong> Python (Flask)</li>
+            <li><strong>AI Model:</strong> Face detection and recognition using OpenCV and Dlib</li>
+            <li><strong>Database:</strong> SQLite</li>
+          </ul>
+
+          <h4>4. Key Features</h4>
+          <ul>
+            <li><strong>Face Detection & Recognition:</strong> Automated identification of students</li>
+            <li><strong>Attendance Logging:</strong> Real-time marking with timestamp</li>
+            <li><strong>Anti-Proxy Mechanism:</strong> Prevents impersonation through biometric verification</li>
+            <li><strong>Data Storage & Reporting:</strong> Structured attendance records and export functionality</li>
+          </ul>
+
+          <h4>5. Technical Implementation</h4>
+          <ul>
+            <li><strong>Computer Vision Pipeline:</strong> Face detection using OpenCV, encoding using Dlib, matching against dataset</li>
+            <li><strong>Backend:</strong> Flask-based API, SQLite database, structured tables</li>
+            <li><strong>Mobile Integration:</strong> Flutter interface for capturing/sending images, API communication</li>
+            <li><strong>Performance:</strong> Optimized image processing, efficient dataset handling</li>
+          </ul>
+
+          <h4>6. Design Decisions & Trade-offs</h4>
+          <ul>
+            <li><strong>Python for AI Processing:</strong> Strong computer vision ecosystem</li>
+            <li><strong>Mobile + Backend Split:</strong> Lightweight mobile app, network dependency</li>
+          </ul>
+
+          <h4>7. Evaluation</h4>
+          <ul>
+            <li>High accuracy in detecting and recording attendance</li>
+            <li>Significant reduction in proxy attendance cases</li>
+            <li>Faster attendance processing compared to manual methods</li>
+          </ul>
+
+          <h4>8. Challenges & Solutions</h4>
+          <ul>
+            <li><strong>Lighting and Image Quality:</strong> Improved dataset and preprocessing</li>
+            <li><strong>Recognition Accuracy:</strong> Enhanced by increasing training data and refining algorithms</li>
+            <li><strong>Performance Bottlenecks:</strong> Optimized detection pipeline</li>
+          </ul>
+
+          <h4>9. Limitations</h4>
+          <ul>
+            <li>Sensitive to lighting conditions</li>
+            <li>Requires high-quality training data</li>
+            <li>Limited scalability without cloud deployment</li>
+          </ul>
+
+          <h4>10. Future Improvements</h4>
+          <ul>
+            <li>Liveness detection to prevent spoofing</li>
+            <li>Cloud-based model deployment</li>
+            <li>Multi-camera support for large classrooms</li>
+          </ul>
+
+          <h4>11. Demo</h4>
+          <p><em>A demo link is available below.</em></p>
+
+          <h4>12. Code Availability</h4>
+          <p>Source code available upon request due to privacy restrictions.</p>
+        `
+      },
+      {
+        id: 'lgms',
+        initials: 'LG',
+        category: 'GovTech',
+        title: 'Local Government Management System',
+        tone: 'forest',
+        tags: ['Flutter', 'REST API', 'Mobile-First'],
+        short: 'Citizen-centric mobile interface for municipal services, enabling real-time service requests, payments, and engagement.',
+        demoLink: 'https://drive.google.com/file/d/1AWToSl7oZrVCtpmsGxtuQLGndd9H69ig/view?usp=sharing', // <-- Add your Google Drive link here
+        long: `
+          <h4>1. Problem Context</h4>
+          <p>Citizens often face limited access to municipal services due to physical constraints, inefficient processes, and lack of real-time communication with local authorities. Existing systems are largely web-based or manual, excluding mobile-first users—especially in regions where smartphones are the primary access point to digital services.</p>
+
+          <h4>2. Objective</h4>
+          <p>The mobile application aims to provide a <strong>citizen-centric, accessible interface</strong> for interacting with local government services, enabling real-time service requests, payments, and engagement through a scalable and user-friendly platform.</p>
+
+          <h4>3. System Overview</h4>
+          <ul>
+            <li><strong>Platform:</strong> Cross-platform mobile (Android & iOS)</li>
+            <li><strong>Framework:</strong> Flutter</li>
+            <li><strong>Architecture:</strong> MVVM-inspired Clean Architecture</li>
+            <li><strong>Backend Integration:</strong> RESTful APIs connected to LGMS microservices</li>
+            <li><strong>State Management:</strong> Provider / Riverpod</li>
+          </ul>
+
+          <h4>4. Key Features</h4>
+          <ul>
+            <li><strong>Citizen Registration & Verification:</strong> Secure onboarding with GhanaCard verification integration</li>
+            <li><strong>Service Requests & Complaints:</strong> Report issues (e.g., waste, infrastructure) with status tracking</li>
+            <li><strong>Mobile Payments Integration:</strong> Pay taxes, fees, and permits via integrated payment gateway</li>
+            <li><strong>Notifications & Updates:</strong> Real-time updates on application status, payments, and announcements</li>
+            <li><strong>Dashboard & Personal Profile:</strong> Centralized view of user activities, history, and records</li>
+          </ul>
+
+          <h4>5. Technical Implementation</h4>
+          <ul>
+            <li><strong>State Management:</strong> Riverpod/Bloc to separate UI from business logic</li>
+            <li><strong>API Integration:</strong> RESTful communication using HTTP/Dio, JWT-based authentication</li>
+            <li><strong>Architecture:</strong> Layered structure: Presentation → Domain → Data, Repository pattern, Dependency injection</li>
+            <li><strong>Local Storage:</strong> Secure storage for tokens (Flutter Secure Storage), caching for offline resilience</li>
+            <li><strong>Performance:</strong> Lazy loading, pagination, efficient widget rebuilds</li>
+          </ul>
+
+          <h4>6. Design Decisions & Trade-offs</h4>
+          <ul>
+            <li><strong>Flutter over Native:</strong> Faster cross-platform development, slightly larger app size</li>
+            <li><strong>Clean Architecture:</strong> Improves maintainability, adds complexity for smaller features</li>
+            <li><strong>REST over GraphQL:</strong> Simpler integration with existing backend services</li>
+          </ul>
+
+          <h4>7. Evaluation</h4>
+          <ul>
+            <li><strong>Performance:</strong> Smooth UI rendering with minimal frame drops</li>
+            <li><strong>User Experience:</strong> Simplified workflows reduced friction in service requests and payments</li>
+            <li><strong>Impact:</strong> Improved accessibility to government services via mobile devices</li>
+          </ul>
+
+          <h4>8. Challenges & Solutions</h4>
+          <ul>
+            <li><strong>Unstable Network Conditions:</strong> Implemented caching and retry mechanisms</li>
+            <li><strong>Complex API Interactions:</strong> Abstracted using repository pattern</li>
+            <li><strong>State Management Complexity:</strong> Structured approach to prevent UI inconsistencies</li>
+          </ul>
+
+          <h4>9. Limitations</h4>
+          <ul>
+            <li>Limited offline functionality for some features</li>
+            <li>Dependency on backend API availability</li>
+            <li>Device performance variations across low-end smartphones</li>
+          </ul>
+
+          <h4>10. Future Improvements</h4>
+          <ul>
+            <li>Offline-first architecture for critical services</li>
+            <li>Push notifications for real-time engagement</li>
+            <li>Biometric authentication integration</li>
+            <li>AI-driven personalization and recommendations</li>
+          </ul>
+
+          <h4>11. Demo</h4>
+          <p><em>A demo link is available below.</em></p>
+
+          <h4>12. Code Availability</h4>
+          <p>Source code available upon request due to privacy restrictions.</p>
+        `
+      },
+      {
+        id: 'fuel',
+        initials: 'FA',
+        category: 'Operations',
+        title: 'Fuel Attendant Management System',
+        tone: 'dark',
+        tags: ['Java', 'Android', 'SQLite'],
+        short: 'Robust, real-time mobile transaction system for fuel attendants, improving efficiency and accountability.',
+        demoLink: 'https://drive.google.com/file/d/1jPmyNMCMy7cwQQu8X6Q_bJ07hjbzhWDG/view?usp=sharing', // <-- Add your Google Drive link here
+        long: `
+          <h4>1. Problem Context</h4>
+          <p>Fuel station operations often rely on manual tracking or fragmented systems, leading to transaction inaccuracies, fuel stock inconsistencies, and limited real-time oversight. Attendants require a reliable, fast, and structured mobile system to handle high-frequency transactions efficiently.</p>
+
+          <h4>2. Objective</h4>
+          <p>The application is designed to provide a <strong>robust, real-time mobile transaction system</strong> for fuel attendants, improving operational efficiency, accuracy, and accountability at fuel stations.</p>
+
+          <h4>3. System Overview</h4>
+          <ul>
+            <li><strong>Platform:</strong> Android mobile application</li>
+            <li><strong>Language:</strong> Java</li>
+            <li><strong>Architecture:</strong> MVVM (Model-View-ViewModel)</li>
+            <li><strong>Backend Integration:</strong> RESTful APIs</li>
+            <li><strong>Primary Users:</strong> Fuel attendants</li>
+          </ul>
+
+          <h4>4. Key Features</h4>
+          <ul>
+            <li><strong>Fuel Sales Processing:</strong> Fast entry and calculation of fuel transactions</li>
+            <li><strong>Multi-Payment Handling:</strong> Support for cash, card, and mobile money payments</li>
+            <li><strong>Transaction Logging:</strong> Real-time recording of all sales for auditing</li>
+            <li><strong>Shift Management:</strong> Login-based shift tracking for accountability</li>
+            <li><strong>Offline Capability:</strong> Transactions stored locally and synced when network is available</li>
+            <li><strong>Daily Summary Dashboard:</strong> View sales totals and activity logs</li>
+          </ul>
+
+          <h4>5. Technical Implementation</h4>
+          <ul>
+            <li><strong>Architecture:</strong> MVVM for separation of concerns, Repository layer, ViewModel for lifecycle-aware UI</li>
+            <li><strong>API Integration:</strong> REST APIs using Retrofit, JSON parsing with Gson, async calls using Coroutines</li>
+            <li><strong>Local Storage:</strong> Room Database, Sync manager to push pending transactions</li>
+            <li><strong>Security:</strong> Token-based authentication (JWT), HTTPS, Input validation</li>
+            <li><strong>Performance:</strong> Optimized RecyclerViews, efficient threading, lightweight UI</li>
+          </ul>
+
+          <h4>6. Design Decisions & Trade-offs</h4>
+          <ul>
+            <li><strong>Java over Kotlin:</strong> Chosen for compatibility and familiarity, though more verbose</li>
+            <li><strong>Offline-First Approach:</strong> Ensures reliability in low-network environments, adds sync complexity</li>
+            <li><strong>Native Android:</strong> Provides better performance and hardware control</li>
+          </ul>
+
+          <h4>7. Evaluation</h4>
+          <ul>
+            <li><strong>Operational Impact:</strong> Reduced transaction errors, faster service delivery, improved accountability</li>
+            <li><strong>System Performance:</strong> Stable under high transaction load, reliable offline-to-online sync</li>
+          </ul>
+
+          <h4>8. Challenges & Solutions</h4>
+          <ul>
+            <li><strong>Network Instability:</strong> Solved using Room database and background sync</li>
+            <li><strong>Concurrency Issues:</strong> Managed with proper threading and API call handling</li>
+            <li><strong>Usability:</strong> Simplified UI with minimal input steps and clear workflows</li>
+          </ul>
+
+          <h4>9. Limitations</h4>
+          <ul>
+            <li>Limited analytics features on mobile</li>
+            <li>Dependency on backend for full reporting</li>
+            <li>Sync conflicts possible in rare edge cases</li>
+          </ul>
+
+          <h4>10. Future Improvements</h4>
+          <ul>
+            <li>Migration to Kotlin for improved maintainability</li>
+            <li>Integration with IoT-enabled fuel pumps</li>
+            <li>Biometric authentication (fingerprint)</li>
+            <li>Real-time push notifications</li>
+          </ul>
+
+          <h4>11. Demo</h4>
+          <p><em>A demo link is available below.</em></p>
+
+          <h4>12. Code Availability</h4>
+          <p>Source code available upon request due to privacy restrictions.</p>
+        `
+      },
+      {
+        id: 'ess',
+        initials: 'ESS',
+        category: 'HR Tech',
+        title: 'Employee Self-Service & HR Management',
+        tone: 'earth',
+        tags: ['Flutter', 'Riverpod', 'JWT', 'SSO'],
+        short: 'Real-time, self-service HR mobile app enabling employees and managers to manage leave, payroll, performance, and more.',
+        demoLink: 'https://drive.google.com/file/d/1HS3agU-a_46vYQyzEqb6q5HILYUkfRZw/view?usp=sharing', // <-- Add your Google Drive demo link here
+        long: `
+    <h4>1. Problem Context</h4>
+    <p>Traditional HR management relies heavily on desktop portals, email trails, and physical paperwork, which creates significant friction for employees and HR administrators. Routine tasks such as requesting leave, accessing payslips, submitting performance appraisals, and tracking certifications often involve delays, manual follow-ups, and limited visibility. For remote or field-based employees, accessing these services is particularly challenging. Furthermore, HR teams struggle with managing policy acknowledgments, document versions, and helpdesk tickets efficiently without a centralized, real-time system.</p>
+
+    <h4>2. Objective</h4>
+    <p>The mobile application is designed to provide a <strong>real-time, self-service interface</strong> for employees and managers to manage HR-related activities from their mobile devices. The goal is to reduce HR administrative overhead, accelerate approval workflows, improve employee engagement, and provide secure, on-the-go access to personal, financial, and career development information.</p>
+
+    <h4>3. System Overview</h4>
+    <ul>
+      <li><strong>Platform:</strong> Cross-platform mobile application (Android & iOS)</li>
+      <li><strong>Framework:</strong> Flutter</li>
+      <li><strong>Architecture:</strong> Clean Architecture (MVVM-inspired)</li>
+      <li><strong>Backend Integration:</strong> RESTful APIs connected to the core HR/ERP backend</li>
+      <li><strong>State Management:</strong> Riverpod / Bloc</li>
+    </ul>
+
+    <h4>4. Key Features</h4>
+    <ul>
+      <li><strong>Personal Information Management:</strong> View and update profiles, manage photos, change passwords/2FA, view employment details</li>
+      <li><strong>Leave Management:</strong> Submit requests, view balances, track approvals, view team calendars, access history</li>
+      <li><strong>Performance Appraisal:</strong> Submit self-appraisals, manager evaluations, set goals, 360-degree feedback, download reports</li>
+      <li><strong>Requisition Management:</strong> Request stationery, logistics, travel; attach documents; track statuses</li>
+      <li><strong>Payroll:</strong> View/download payslips, tax breakdowns, bonuses, update bank details, download tax certificates</li>
+      <li><strong>Company Policies:</strong> View/acknowledge policies, browse document library, search, download, track updates</li>
+      <li><strong>Certifications:</strong> Upload certificates, track verification, receive expiry alerts, download verified documents</li>
+      <li><strong>Training & Development:</strong> View calendars, enroll, track progress, submit feedback, upload/download certificates</li>
+      <li><strong>Document Management:</strong> Central repository, digital signatures, secure download/view</li>
+      <li><strong>HR Requests & Helpdesk:</strong> Submit tickets, track statuses, access knowledge base/FAQs, live chat (optional)</li>
+      <li><strong>Notifications & Alerts:</strong> Email/in-app alerts for approvals, deadlines, expirations, with configurable preferences</li>
+      <li><strong>Expense Claims (Optional Extension):</strong> Submit claims, attach receipts, track approvals</li>
+    </ul>
+
+    <h4>5. Technical Implementation</h4>
+    <ul>
+      <li><strong>State Management:</strong> Riverpod/Bloc to separate business logic from UI, ensuring predictable data flow</li>
+      <li><strong>API Integration:</strong> RESTful APIs via Dio/HTTP, JWT-based authentication with automatic token refresh</li>
+      <li><strong>Architecture:</strong> Layered approach: Presentation → Domain → Data, Repository pattern, Dependency injection</li>
+      <li><strong>Local Storage:</strong> Secure token storage (Flutter Secure Storage), caching for leave balances, policies, payroll summaries</li>
+      <li><strong>Authentication & Security:</strong> SSO integration, MFA for sensitive actions, encrypted communication (HTTPS), biometric lock (optional)</li>
+      <li><strong>Performance:</strong> Lazy loading, optimized widget rebuilds, background sync for notifications</li>
+    </ul>
+
+    <h4>6. Design Decisions & Trade-offs</h4>
+    <ul>
+      <li><strong>Flutter over Native:</strong> Enables faster cross-platform deployment with a single codebase, though relies on plugins for native HR features</li>
+      <li><strong>Mobile-First Workflow:</strong> Prioritized high-frequency actions (leave requests, payslip views) over replicating the full desktop admin interface</li>
+      <li><strong>REST API Integration:</strong> Simpler backend compatibility, though less flexible than GraphQL for dynamic dashboards</li>
+    </ul>
+
+    <h4>7. Evaluation</h4>
+    <ul>
+      <li><strong>User Impact:</strong> Faster approval turnaround, reduced HR ticket volume, improved employee satisfaction, higher engagement in training</li>
+      <li><strong>System Performance:</strong> Smooth navigation, minimal load times via effective caching</li>
+    </ul>
+
+    <h4>8. Challenges & Solutions</h4>
+    <ul>
+      <li><strong>Complex Hierarchical Approvals:</strong> Simplified approval screens with clear action buttons and full context</li>
+      <li><strong>Sensitive Financial Data:</strong> Implemented maskable views and MFA before displaying full information</li>
+      <li><strong>Real-time Policy Updates:</strong> Push notifications and mandatory acknowledgment workflows</li>
+      <li><strong>Offline Access Constraints:</strong> Prioritized read-only caching for critical data while requiring connectivity for submissions</li>
+    </ul>
+
+    <h4>9. Limitations</h4>
+    <ul>
+      <li>Limited offline capabilities for workflow-heavy features</li>
+      <li>Dependence on backend API availability</li>
+      <li>Some advanced administrative functions remain web-only</li>
+      <li>File upload sizes limited by network and server constraints</li>
+    </ul>
+
+    <h4>10. Future Improvements</h4>
+    <ul>
+      <li>Push notifications with deep linking to specific tasks</li>
+      <li>Offline-first support with automatic sync</li>
+      <li>Biometric authentication for sensitive modules</li>
+      <li>AI-powered HR chatbot for instant answers</li>
+      <li>Dark mode and enhanced accessibility features</li>
+      <li>Manager analytics dashboard with team trends</li>
+    </ul>
+
+    <h4>11. Demo</h4>
+    <p><em>A demo link is available below.</em></p>
+
+    <h4>12. Code Availability</h4>
+    <p>Source code available upon request due to privacy and security restrictions.</p>
+  `
+      },
+      
+      {
+        id: 'tradepay',
+        initials: 'TP',
+        category: 'Fintech',
+        title: 'TradePay Africa',
+        tone: 'earth',
+        tags: ['Flutter', 'Django', 'Marketplace'],
+        short: 'Unified mobile commerce platform enabling seamless B2B, B2C, and C2B transactions across African markets.',
+        demoLink: 'https://drive.google.com/file/d/1G24NoUrXq4Vj2ZnrPoC3J2zQ3xeQuEQv/view?usp=sharing', // <-- Add your Google Drive link here
+        long: `
+          <h4>1. Problem Context</h4>
+          <p>Trade across African markets remains fragmented due to limited digital infrastructure, lack of trust in cross-border transactions, inconsistent logistics systems, and payment barriers. Informal traders and SMEs face significant challenges accessing wider markets, managing transactions, and ensuring secure payments.</p>
+
+          <h4>2. Objective</h4>
+          <p>The mobile application is designed to provide a <strong>unified, mobile-first commerce platform</strong> that enables seamless B2B, B2C, and C2B transactions across African markets, with integrated payments, logistics, and trust systems.</p>
+
+          <h4>3. System Overview</h4>
+          <ul>
+            <li><strong>Platform:</strong> Cross-platform mobile (Android & iOS)</li>
+            <li><strong>Framework:</strong> Flutter</li>
+            <li><strong>Architecture:</strong> Clean Architecture (MVVM-inspired)</li>
+            <li><strong>Backend Integration:</strong> RESTful APIs (Django/Python)</li>
+            <li><strong>Primary Users:</strong> Traders, businesses, consumers</li>
+          </ul>
+
+          <h4>4. Key Features</h4>
+          <ul>
+            <li><strong>User Registration & Verification:</strong> Multi-role onboarding with KYC validation</li>
+            <li><strong>Product Marketplace:</strong> Multi-category listings with variants, bulk pricing, multi-currency</li>
+            <li><strong>Shopping & Checkout:</strong> Cart management, dynamic shipping cost calculation</li>
+            <li><strong>Order Management:</strong> Full lifecycle tracking with return and dispute handling</li>
+            <li><strong>In-App Messaging:</strong> Real-time communication between buyers, sellers, and partners</li>
+            <li><strong>Trust & Reviews:</strong> Verified ratings for products, sellers, and logistics providers</li>
+          </ul>
+
+          <h4>5. Technical Implementation</h4>
+          <ul>
+            <li><strong>State Management:</strong> Riverpod/Bloc for complex UI states (cart, orders, sessions)</li>
+            <li><strong>API Integration:</strong> REST APIs using Dio/HTTP, JWT authentication</li>
+            <li><strong>Architecture:</strong> Presentation → Domain → Data, Repository pattern, Dependency injection</li>
+            <li><strong>Local Storage:</strong> Secure token storage, caching of product listings and user data</li>
+            <li><strong>Performance:</strong> Lazy loading, pagination, optimized image loading</li>
+          </ul>
+
+          <h4>6. Design Decisions & Trade-offs</h4>
+          <ul>
+            <li><strong>Flutter:</strong> Rapid deployment across Android and iOS</li>
+            <li><strong>Mobile-First:</strong> Focused on accessibility for informal traders</li>
+            <li><strong>Microservices Backend:</strong> Improves scalability, increases API coordination complexity</li>
+          </ul>
+
+          <h4>7. Evaluation</h4>
+          <ul>
+            <li><strong>Expected Impact:</strong> Increased market access, improved trust, reduced friction in cross-border trade</li>
+            <li><strong>System Performance:</strong> Smooth navigation, scalable architecture</li>
+          </ul>
+
+          <h4>8. Challenges & Solutions</h4>
+          <ul>
+            <li><strong>Multi-Currency Transactions:</strong> Managed through backend abstraction</li>
+            <li><strong>Complex Order Workflows:</strong> Simplified UI flows while maintaining full lifecycle visibility</li>
+            <li><strong>Network Limitations:</strong> Caching and optimized API calls to reduce data usage</li>
+          </ul>
+
+          <h4>9. Limitations</h4>
+          <ul>
+            <li>Payment and shipping integrations not fully implemented</li>
+            <li>Limited offline functionality for transactional features</li>
+            <li>Dependency on backend readiness</li>
+          </ul>
+
+          <h4>10. Future Improvements</h4>
+          <ul>
+            <li>Full payment gateway integration (mobile money, cross-border)</li>
+            <li>Real-time shipment tracking with map integration</li>
+            <li>Offline-first support for low-connectivity regions</li>
+            <li>AI-based product recommendations and fraud detection</li>
+          </ul>
+
+          <h4>11. Demo</h4>
+          <p><em>A demo link is available below.</em></p>
+
+          <h4>12. Code Availability</h4>
+          <p>Source code available upon request due to privacy restrictions.</p>
+        `
+      },
+
+      {
+        id: 'tuetra',
+        initials: 'TU',
+        category: 'Marketplace',
+        title: 'Tuetra Rental Marketplace',
+        tone: 'dark',
+        tags: ['Flutter', 'Google Maps', 'Location'],
+        short: 'Location-aware, community-driven mobile platform enabling users to rent nearby assets or monetize idle resources.',
+        demoLink: 'https://drive.google.com/file/d/1Xv7OchsCi4211bcerL9Ie_BGjNwIp7WK/view?usp=sharing', // <-- Add your Google Drive link here
+        long: `
+          <h4>1. Problem Context</h4>
+          <p>Many individuals and small businesses own underutilized assets such as tools, vehicles, and spaces that remain idle and generate no value. At the same time, others face high costs when purchasing items needed only temporarily. The absence of a structured, trusted rental ecosystem leads to inefficient resource utilization, unnecessary spending, and limited economic opportunities.</p>
+
+          <h4>2. Objective</h4>
+          <p>To develop a <strong>location-aware, community-driven mobile platform</strong> that enables users to rent nearby assets or monetize idle resources, thereby improving asset utilization and creating decentralized economic opportunities.</p>
+
+          <h4>3. System Overview</h4>
+          <ul>
+            <li><strong>Platform:</strong> Cross-platform mobile (Android & iOS)</li>
+            <li><strong>Framework:</strong> Flutter</li>
+            <li><strong>Architecture:</strong> Clean Architecture (MVVM-inspired)</li>
+            <li><strong>Backend Integration:</strong> RESTful APIs</li>
+            <li><strong>Core Concept:</strong> Proximity-based rental marketplace (≤500m radius)</li>
+          </ul>
+
+          <h4>4. Key Features</h4>
+          <ul>
+            <li><strong>Nearby Asset Discovery:</strong> Location-based search using Google Maps</li>
+            <li><strong>Asset Listing & Management:</strong> List, update, and manage assets</li>
+            <li><strong>Category-Based Marketplace:</strong> Automobiles, electronics, farm tools, properties</li>
+            <li><strong>Rental Workflow Management:</strong> Request → Approval → Pickup → Return → Review</li>
+            <li><strong>Notifications System:</strong> In-app alerts for requests and approvals</li>
+          </ul>
+
+          <h4>5. Technical Implementation</h4>
+          <ul>
+            <li><strong>State Management:</strong> Riverpod/Provider for scalable UI state</li>
+            <li><strong>Location Services:</strong> Google Maps API, proximity filtering (radius-based queries)</li>
+            <li><strong>API Integration:</strong> REST APIs using Dio, JWT-based authentication</li>
+            <li><strong>Data Handling:</strong> Structured asset models, efficient pagination</li>
+            <li><strong>Performance:</strong> Caching, optimized UI rendering with lazy loading</li>
+          </ul>
+
+          <h4>6. Design Decisions & Trade-offs</h4>
+          <ul>
+            <li><strong>Flutter:</strong> Rapid deployment across Android and iOS</li>
+            <li><strong>Proximity-Based Model (500m Radius):</strong> Reduces logistics complexity, limits inventory in low-density areas</li>
+            <li><strong>Marketplace Simplicity:</strong> Focused on core rental flows</li>
+          </ul>
+
+          <h4>7. Evaluation</h4>
+          <ul>
+            <li><strong>Impact:</strong> Improved access to affordable short-term asset usage, income generation from idle assets</li>
+            <li><strong>System Performance:</strong> Fast asset discovery, smooth UI experience</li>
+          </ul>
+
+          <h4>8. Challenges & Solutions</h4>
+          <ul>
+            <li><strong>Accurate Location Filtering:</strong> Efficient geospatial queries and radius constraints</li>
+            <li><strong>User Trust:</strong> Review systems and structured workflows</li>
+            <li><strong>Data Volume:</strong> Pagination and optimized API calls</li>
+          </ul>
+
+          <h4>9. Limitations</h4>
+          <ul>
+            <li>No integrated payment or escrow system</li>
+            <li>Limited offline functionality</li>
+            <li>Dependence on user density for marketplace effectiveness</li>
+          </ul>
+
+          <h4>10. Future Improvements</h4>
+          <ul>
+            <li>Integrated payment and escrow system</li>
+            <li>Real-time chat between renters and owners</li>
+            <li>AI-based recommendation system for assets</li>
+            <li>Expansion beyond fixed-radius discovery</li>
+          </ul>
+
+          <h4>11. Demo</h4>
+          <p><em>A demo link is available below.</em></p>
+
+          <h4>12. Code Availability</h4>
+          <p>Source code available upon request due to privacy restrictions.</p>
+        `
+      }
+    ];
+
+    // ------------------------------------------------------------
+    // 2. RENDER PROJECT CARDS
+    // ------------------------------------------------------------
+    const grid = document.getElementById('projectGrid');
+
+    function renderProjects() {
+      grid.innerHTML = projects.map(p => {
+        let cardClasses = 'group rounded-2xl p-8 ring-1 flex flex-col h-full project-card transition-all duration-200';
+        let titleClasses = 'text-xl font-medium mb-3';
+        let bodyClasses = 'text-sm mb-6 text-pretty';
+        let tagClasses = 'px-2 py-1 text-[10px] font-semibold rounded uppercase tracking-wider';
+        let initialClasses = 'size-10 rounded-xl grid place-items-center font-bold';
+
+        if (p.tone === 'dark') {
+          cardClasses += ' bg-zinc-900 ring-white/5 text-white';
+          titleClasses += ' text-white';
+          bodyClasses += ' text-zinc-400';
+          tagClasses += ' bg-white/10 text-white/60';
+          initialClasses += ' bg-white/10 text-white';
+        } else {
+          cardClasses += ' bg-white ring-black/5 text-zinc-900';
+          titleClasses += ' text-zinc-900';
+          bodyClasses += ' text-zinc-600';
+          tagClasses += ' bg-zinc-100 text-zinc-500';
+          if (p.tone === 'earth') {
+            initialClasses += ' bg-brand-earth/10 text-brand-earth';
+          } else { // forest
+            initialClasses += ' bg-brand-forest/10 text-brand-forest';
+          }
+        }
+
+        const tagsHtml = p.tags.map(t => `<span class="${tagClasses}">${t}</span>`).join('');
+
+        return `
+          <div class="${cardClasses}" data-id="${p.id}">
+            <div class="mb-6 flex justify-between items-start">
+              <div class="${initialClasses}">${p.initials}</div>
+              <span class="text-[10px] font-bold uppercase tracking-widest ${p.tone === 'dark' ? 'text-white/40' : 'text-zinc-400'}">${p.category}</span>
+            </div>
+            <h3 class="${titleClasses}">${p.title}</h3>
+            <p class="${bodyClasses}">${p.short}</p>
+            <div class="mt-auto flex flex-wrap gap-2">
+              ${tagsHtml}
+            </div>
+            <div class="mt-4 text-xs font-medium ${p.tone === 'dark' ? 'text-brand-earth' : 'text-brand-earth'} flex items-center gap-1">
+              Click to view full case study →
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      document.querySelectorAll('.project-card').forEach(card => {
+        card.addEventListener('click', function () {
+          const id = this.dataset.id;
+          openModal(id);
+        });
+      });
+    }
+
+    // ------------------------------------------------------------
+    // 3. MODAL LOGIC
+    // ------------------------------------------------------------
+    const modal = document.getElementById('projectModal');
+    const modalBody = document.getElementById('modalBody');
+    const closeBtn = document.getElementById('modalCloseBtn');
+    const demoContainer = document.getElementById('demoLinkContainer');
+    const demoBtn = document.getElementById('demoLinkBtn');
+
+    function openModal(id) {
+      const project = projects.find(p => p.id === id);
+      if (!project) return;
+
+      modalBody.innerHTML = `
+        <div class="mb-4 flex items-center gap-3">
+          <span class="text-xs font-bold uppercase tracking-widest text-brand-earth">${project.category}</span>
+          <span class="text-xs text-zinc-400">•</span>
+          <span class="text-xs font-medium text-zinc-500">${project.tags.join(' • ')}</span>
+        </div>
+        <h2 class="text-2xl md:text-3xl font-bold text-zinc-900 mb-4">${project.title}</h2>
+        <div class="prose prose-zinc max-w-none">
+          ${project.long}
+        </div>
+      `;
+
+      // Handle demo link
+      if (project.demoLink && project.demoLink.trim() !== '') {
+        demoBtn.href = project.demoLink;
+        demoContainer.style.display = 'block';
+      } else {
+        demoContainer.style.display = 'none';
+      }
+
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', function (e) {
+      if (e.target === this) closeModal();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    // ------------------------------------------------------------
+    // 4. INITIALIZE
+    // ------------------------------------------------------------
+    renderProjects();
+
+    // Smooth scroll for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
+      anchor.addEventListener('click', function (e) {
         const targetId = this.getAttribute('href');
-        if(targetId === "#" || targetId === "") return;
+        if (targetId === "#" || targetId === "") return;
         const targetElement = document.querySelector(targetId);
-        if(targetElement) {
+        if (targetElement) {
           e.preventDefault();
           targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
@@ -397,4 +1150,5 @@
     });
   </script>
 </body>
+
 </html>
