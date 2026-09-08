@@ -497,96 +497,108 @@
     // ------------------------------------------------------------
     const projects = [
       {
-        id: 'facial',
-        initials: 'FR',
-        category: 'AI / Identity',
-        title: 'Facial Recognition Attendance System',
+        id: 'merban',
+        initials: 'MA',
+        category: 'FinTech / Asset Management',
+        title: 'Merban Investment & Group Savings Platform',
         tone: 'forest',
-        tags: ['Python', 'OpenCV', 'Flutter'],
-        short: 'AI-powered attendance system using facial recognition for accurate, real-time student identification.',
-        demoLink: 'https://drive.google.com/file/d/1w075-m5X3Egx0t7B-z6vcNNVZzc-Enl9/view?usp=sharing', // <-- Add your Google Drive link here
+        tags: ['Flutter', 'Firebase', 'Mobile Money', 'KYC'],
+        short: 'Comprehensive mobile investment platform enabling users to invest in mutual funds, fixed income, stocks, and group savings challenges with integrated mobile money payments.',
+        demoLink: 'https://drive.google.com/file/d/1UPQfT40KzMWM8RZwRkzOT9hr2AkrPAdE/view?usp=drive_link', // No demo available yet – you can add a link later if you have one
         long: `
           <h4>1. Problem Context</h4>
-          <p>Traditional attendance systems are prone to inefficiencies, proxy attendance, and time wastage. Institutions require a <strong>secure, automated, and contactless solution</strong> to ensure accurate attendance tracking. This system eliminates impersonation and significantly improves efficiency in attendance recording.</p>
+          <p>Traditional investment platforms in Ghana are often desktop-centric, require extensive paperwork, and lack seamless mobile money integration. Many potential investors, especially the unbanked and those in remote areas, find it difficult to access formal investment products. Additionally, group savings and goal-based investing are poorly supported by existing digital tools, limiting financial inclusion and collective wealth-building.</p>
 
           <h4>2. Objective</h4>
-          <p>To design and implement an <strong>AI-powered attendance system</strong> that uses facial recognition for accurate, real-time student identification and attendance logging.</p>
+          <p>To build a <strong>mobile-first investment and group savings platform</strong> that empowers individuals and groups to invest in a range of products (mutual funds, fixed income, stocks, wealth management) with minimal friction, while enabling social saving through group challenges and goal setting.</p>
 
           <h4>3. System Overview</h4>
           <ul>
-            <li><strong>Platform:</strong> Mobile + Web-integrated system</li>
-            <li><strong>Mobile Layer:</strong> Flutter (interface and interaction)</li>
-            <li><strong>Backend:</strong> Python (Flask)</li>
-            <li><strong>AI Model:</strong> Face detection and recognition using OpenCV and Dlib</li>
-            <li><strong>Database:</strong> SQLite</li>
+            <li><strong>Platform:</strong> Cross-platform mobile (Android & iOS)</li>
+            <li><strong>Framework:</strong> Flutter</li>
+            <li><strong>State Management:</strong> BLoC / Riverpod</li>
+            <li><strong>Payments:</strong> MTN MoMo, Telecel Cash, AT Money, Visa Card, Bank Transfer</li>
+            <li><strong>Primary Users:</strong> Individual investors, group savers, financial advisors</li>
           </ul>
 
           <h4>4. Key Features</h4>
           <ul>
-            <li><strong>Face Detection & Recognition:</strong> Automated identification of students</li>
-            <li><strong>Attendance Logging:</strong> Real-time marking with timestamp</li>
-            <li><strong>Anti-Proxy Mechanism:</strong> Prevents impersonation through biometric verification</li>
-            <li><strong>Data Storage & Reporting:</strong> Structured attendance records and export functionality</li>
+            <li><strong>Decoupled KYC Workflow:</strong> Users register and explore products before completing KYC; KYC is triggered only at investment initiation, collecting PEP, FATCA/CRS, investment profiling, and personal details as required by regulators.</li>
+            <li><strong>Portfolio Dashboard:</strong> Displays total portfolio value, product allocation chart, wallet balance for uninvested deposits, and quick actions for top-ups or withdrawals.</li>
+            <li><strong>Product Discovery & Investment Flow:</strong> Explore Balanced Fund, Wealth Management, Fixed Income (T-Bills, Bonds, REPO), Stocks (Trading & Wealth Builder), and Savings (coming soon). Each product shows risk level, expected return, minimum investment, and detailed benefits. Users can select, review, and invest with one-time or recurring (standing order) payments.</li>
+            <li><strong>Group Investment Challenges:</strong> Users can create public or private goals (e.g., "100k with friends"), set target amounts, deadlines, and contribution limits. Invite members via shareable links, SMS, or email. Track contributions with a leaderboard, automated reminders, and role-based permissions (creator vs. member). Supports automated top-ups via MoMo, card, or direct debit.</li>
+            <li><strong>Goal Setting (Build Your Dream):</strong> Personal financial goals with progress tracking and optional automated savings plans.</li>
+            <li><strong>Real-Time Notifications:</strong> In-app and SMS alerts for contribution updates, goal milestones, investment status changes, and promotional offers.</li>
+            <li><strong>Market Data & Research:</strong> Live feeds of trading rates, bond yields, and collective investment scheme prices, plus downloadable factsheets and research reports.</li>
           </ul>
 
           <h4>5. Technical Implementation</h4>
           <ul>
-            <li><strong>Computer Vision Pipeline:</strong> Face detection using OpenCV, encoding using Dlib, matching against dataset</li>
-            <li><strong>Backend:</strong> Flask-based API, SQLite database, structured tables</li>
-            <li><strong>Mobile Integration:</strong> Flutter interface for capturing/sending images, API communication</li>
-            <li><strong>Performance:</strong> Optimized image processing, efficient dataset handling</li>
+            <li><strong>State Management:</strong> BLoC/Riverpod to manage complex investment states, user sessions, and real-time updates.</li>
+            <li><strong>API Integration:</strong> RESTful APIs for product data, KYC submission, and payment initiation; Firebase for authentication, real-time Firestore for group challenge data, and Cloud Functions for business logic (e.g., auto-updating investment statuses).</li>
+            <li><strong>Offline-First Strategy:</strong> Cached portfolio summaries and product catalogs; local persistence of pending contributions using Hive/Sembast.</li>
+            <li><strong>Payment Gateway:</strong> Integrated with mobile money APIs (MTN, Telecel, AT) and card/bank transfer via third-party gateways (e.g., Hubtel, Paystack).</li>
+            <li><strong>Security:</strong> JWT-based authentication, HTTPS, biometric login (optional), OTP verification for transactions, and data encryption at rest and in transit.</li>
+            <li><strong>Performance:</strong> Lazy-loaded product lists, optimized image caching, and efficient state updates to ensure smooth UX on low-end devices.</li>
           </ul>
 
           <h4>6. Design Decisions & Trade-offs</h4>
           <ul>
-            <li><strong>Python for AI Processing:</strong> Strong computer vision ecosystem</li>
-            <li><strong>Mobile + Backend Split:</strong> Lightweight mobile app, network dependency</li>
+            <li><strong>Flutter over Native:</strong> Accelerated development and consistent UI across both platforms, though slightly larger app size.</li>
+            <li><strong>Decoupled KYC:</strong> Improves user onboarding conversion but requires careful state management to ensure KYC completion before investment.</li>
+            <li><strong>Firebase for Real-Time Data:</strong> Enables instant updates for group challenges and notifications; however, Firestore cost and query limitations required careful data modeling.</li>
+            <li><strong>Mobile Money Focus:</strong> Prioritized Ghana's dominant payment method, while supporting cards and bank transfers for flexibility.</li>
           </ul>
 
           <h4>7. Evaluation</h4>
           <ul>
-            <li>High accuracy in detecting and recording attendance</li>
-            <li>Significant reduction in proxy attendance cases</li>
-            <li>Faster attendance processing compared to manual methods</li>
+            <li><strong>User Impact:</strong> Expected to lower the barrier to entry for retail investors, increase financial literacy through product transparency, and foster community-driven savings.</li>
+            <li><strong>System Performance:</strong> Smooth navigation with sub-second load times for dashboards and product pages; real-time updates for group challenges perform reliably.</li>
+            <li><strong>Scalability:</strong> Firebase and cloud functions allow horizontal scaling to accommodate growing user bases and transaction volumes.</li>
           </ul>
 
           <h4>8. Challenges & Solutions</h4>
           <ul>
-            <li><strong>Lighting and Image Quality:</strong> Improved dataset and preprocessing</li>
-            <li><strong>Recognition Accuracy:</strong> Enhanced by increasing training data and refining algorithms</li>
-            <li><strong>Performance Bottlenecks:</strong> Optimized detection pipeline</li>
+            <li><strong>Complex KYC Workflow:</strong> Implemented a dynamic form system that adapts based on user responses (e.g., PEP, foreign residency) and stores partial data to allow resume later.</li>
+            <li><strong>Real-Time Group Updates:</strong> Used Firestore listeners with efficient querying and indexing to avoid excessive reads while keeping dashboards live.</li>
+            <li><strong>Payment Integration Reliability:</strong> Built retry mechanisms and webhook handlers to reconcile payment statuses, with fallback to manual confirmation where needed.</li>
+            <li><strong>Offline Contribution Handling:</strong> Stored pending contributions locally with a background sync service that retries when connectivity is restored.</li>
           </ul>
 
           <h4>9. Limitations</h4>
           <ul>
-            <li>Sensitive to lighting conditions</li>
-            <li>Requires high-quality training data</li>
-            <li>Limited scalability without cloud deployment</li>
+            <li>Some complex investment products (e.g., bonds) require manual backend processes; automated lifecycle management is still in development.</li>
+            <li>Offline support is limited to read-only access; contributions and investments require an active network connection.</li>
+            <li>Group challenge creator permissions are not yet fully delegated (e.g., ability to assign co-creators).</li>
+            <li>Current version supports only Ghana cedis; multi-currency support is planned.</li>
           </ul>
 
           <h4>10. Future Improvements</h4>
           <ul>
-            <li>Liveness detection to prevent spoofing</li>
-            <li>Cloud-based model deployment</li>
-            <li>Multi-camera support for large classrooms</li>
+            <li>Full automation of bond and treasury bill lifecycle (primary and secondary markets).</li>
+            <li>Integration with investment portfolio analytics (performance benchmarks, risk metrics).</li>
+            <li>AI-driven personalized product recommendations based on user risk profile and goals.</li>
+            <li>Expansion to other African markets with localized payment methods and regulatory compliance.</li>
+            <li>Advanced group features: voting on goal extensions, milestone celebrations, and gamification.</li>
           </ul>
 
           <h4>11. Demo</h4>
-          <p><em>A demo link is available below.</em></p>
+          <p><em>Demo video and testflight access available upon request.</em></p>
 
           <h4>12. Code Availability</h4>
-          <p>Source code available upon request due to privacy restrictions.</p>
+          <p>Source code is proprietary to Merban Capital; however, architectural documentation and selected modules can be shared under NDA.</p>
         `
       },
+      
       {
         id: 'lgms',
         initials: 'LG',
         category: 'GovTech',
-        title: 'Local Government Management System',
-        tone: 'forest',
+        title: 'Local Government Management App',
+       tone: 'dark',
         tags: ['Flutter', 'REST API', 'Mobile-First'],
         short: 'Citizen-centric mobile interface for municipal services, enabling real-time service requests, payments, and engagement.',
-        demoLink: 'https://drive.google.com/file/d/1AWToSl7oZrVCtpmsGxtuQLGndd9H69ig/view?usp=sharing', // <-- Add your Google Drive link here
+        demoLink: 'https://drive.google.com/file/d/1AWToSl7oZrVCtpmsGxtuQLGndd9H69ig/view?usp=sharing',
         long: `
           <h4>1. Problem Context</h4>
           <p>Citizens often face limited access to municipal services due to physical constraints, inefficient processes, and lack of real-time communication with local authorities. Existing systems are largely web-based or manual, excluding mobile-first users—especially in regions where smartphones are the primary access point to digital services.</p>
@@ -668,11 +680,11 @@
         id: 'fuel',
         initials: 'FA',
         category: 'Operations',
-        title: 'Fuel Attendant Management System',
+        title: 'Fuel Attendant Mobile App',
         tone: 'dark',
         tags: ['Java', 'Android', 'SQLite'],
         short: 'Robust, real-time mobile transaction system for fuel attendants, improving efficiency and accountability.',
-        demoLink: 'https://drive.google.com/file/d/1jPmyNMCMy7cwQQu8X6Q_bJ07hjbzhWDG/view?usp=sharing', // <-- Add your Google Drive link here
+        demoLink: 'https://drive.google.com/file/d/1jPmyNMCMy7cwQQu8X6Q_bJ07hjbzhWDG/view?usp=sharing',
         long: `
           <h4>1. Problem Context</h4>
           <p>Fuel station operations often rely on manual tracking or fragmented systems, leading to transaction inaccuracies, fuel stock inconsistencies, and limited real-time oversight. Attendants require a reliable, fast, and structured mobile system to handle high-frequency transactions efficiently.</p>
@@ -754,11 +766,11 @@
         id: 'ess',
         initials: 'ESS',
         category: 'HR Tech',
-        title: 'Employee Self-Service & HR Management',
+        title: 'Employee Self-Service & HR Mobile App',
         tone: 'earth',
         tags: ['Flutter', 'Riverpod', 'JWT', 'SSO'],
         short: 'Real-time, self-service HR mobile app enabling employees and managers to manage leave, payroll, performance, and more.',
-        demoLink: 'https://drive.google.com/file/d/1HS3agU-a_46vYQyzEqb6q5HILYUkfRZw/view?usp=sharing', // <-- Add your Google Drive demo link here
+        demoLink: 'https://drive.google.com/file/d/1HS3agU-a_46vYQyzEqb6q5HILYUkfRZw/view?usp=sharing',
         long: `
     <h4>1. Problem Context</h4>
     <p>Traditional HR management relies heavily on desktop portals, email trails, and physical paperwork, which creates significant friction for employees and HR administrators. Routine tasks such as requesting leave, accessing payslips, submitting performance appraisals, and tracking certifications often involve delays, manual follow-ups, and limited visibility. For remote or field-based employees, accessing these services is particularly challenging. Furthermore, HR teams struggle with managing policy acknowledgments, document versions, and helpdesk tickets efficiently without a centralized, real-time system.</p>
@@ -854,9 +866,9 @@
         category: 'Fintech',
         title: 'TradePay Africa',
         tone: 'earth',
-        tags: ['Flutter', 'Django', 'Marketplace'],
+        tags: ['Flutter', 'Marketplace'],
         short: 'Unified mobile commerce platform enabling seamless B2B, B2C, and C2B transactions across African markets.',
-        demoLink: 'https://drive.google.com/file/d/1G24NoUrXq4Vj2ZnrPoC3J2zQ3xeQuEQv/view?usp=sharing', // <-- Add your Google Drive link here
+        demoLink: 'https://drive.google.com/file/d/1G24NoUrXq4Vj2ZnrPoC3J2zQ3xeQuEQv/view?usp=sharing',
         long: `
           <h4>1. Problem Context</h4>
           <p>Trade across African markets remains fragmented due to limited digital infrastructure, lack of trust in cross-border transactions, inconsistent logistics systems, and payment barriers. Informal traders and SMEs face significant challenges accessing wider markets, managing transactions, and ensuring secure payments.</p>
@@ -869,7 +881,6 @@
             <li><strong>Platform:</strong> Cross-platform mobile (Android & iOS)</li>
             <li><strong>Framework:</strong> Flutter</li>
             <li><strong>Architecture:</strong> Clean Architecture (MVVM-inspired)</li>
-            <li><strong>Backend Integration:</strong> RESTful APIs (Django/Python)</li>
             <li><strong>Primary Users:</strong> Traders, businesses, consumers</li>
           </ul>
 
@@ -943,7 +954,7 @@
         tone: 'dark',
         tags: ['Flutter', 'Google Maps', 'Location'],
         short: 'Location-aware, community-driven mobile platform enabling users to rent nearby assets or monetize idle resources.',
-        demoLink: 'https://drive.google.com/file/d/1Xv7OchsCi4211bcerL9Ie_BGjNwIp7WK/view?usp=sharing', // <-- Add your Google Drive link here
+        demoLink: 'https://drive.google.com/file/d/1Xv7OchsCi4211bcerL9Ie_BGjNwIp7WK/view?usp=sharing',
         long: `
           <h4>1. Problem Context</h4>
           <p>Many individuals and small businesses own underutilized assets such as tools, vehicles, and spaces that remain idle and generate no value. At the same time, others face high costs when purchasing items needed only temporarily. The absence of a structured, trusted rental ecosystem leads to inefficient resource utilization, unnecessary spending, and limited economic opportunities.</p>
@@ -1019,7 +1030,93 @@
           <h4>12. Code Availability</h4>
           <p>Source code available upon request due to privacy restrictions.</p>
         `
-      }
+      },
+
+      {
+        id: 'facial',
+        initials: 'FR',
+        category: 'AI / Identity',
+        title: 'Facial Recognition Attendance System',
+        tone: 'forest',
+        tags: ['Python', 'OpenCV', 'Flutter'],
+        short: 'AI-powered attendance system using facial recognition for accurate, real-time student identification.',
+        demoLink: 'https://drive.google.com/file/d/1w075-m5X3Egx0t7B-z6vcNNVZzc-Enl9/view?usp=sharing',
+        long: `
+          <h4>1. Problem Context</h4>
+          <p>Traditional attendance systems are prone to inefficiencies, proxy attendance, and time wastage. Institutions require a <strong>secure, automated, and contactless solution</strong> to ensure accurate attendance tracking. This system eliminates impersonation and significantly improves efficiency in attendance recording.</p>
+
+          <h4>2. Objective</h4>
+          <p>To design and implement an <strong>AI-powered attendance system</strong> that uses facial recognition for accurate, real-time student identification and attendance logging.</p>
+
+          <h4>3. System Overview</h4>
+          <ul>
+            <li><strong>Platform:</strong> Mobile + Web-integrated system</li>
+            <li><strong>Mobile Layer:</strong> Flutter (interface and interaction)</li>
+            <li><strong>Backend:</strong> Python (Flask)</li>
+            <li><strong>AI Model:</strong> Face detection and recognition using OpenCV and Dlib</li>
+            <li><strong>Database:</strong> SQLite</li>
+          </ul>
+
+          <h4>4. Key Features</h4>
+          <ul>
+            <li><strong>Face Detection & Recognition:</strong> Automated identification of students</li>
+            <li><strong>Attendance Logging:</strong> Real-time marking with timestamp</li>
+            <li><strong>Anti-Proxy Mechanism:</strong> Prevents impersonation through biometric verification</li>
+            <li><strong>Data Storage & Reporting:</strong> Structured attendance records and export functionality</li>
+          </ul>
+
+          <h4>5. Technical Implementation</h4>
+          <ul>
+            <li><strong>Computer Vision Pipeline:</strong> Face detection using OpenCV, encoding using Dlib, matching against dataset</li>
+            <li><strong>Backend:</strong> Flask-based API, SQLite database, structured tables</li>
+            <li><strong>Mobile Integration:</strong> Flutter interface for capturing/sending images, API communication</li>
+            <li><strong>Performance:</strong> Optimized image processing, efficient dataset handling</li>
+          </ul>
+
+          <h4>6. Design Decisions & Trade-offs</h4>
+          <ul>
+            <li><strong>Python for AI Processing:</strong> Strong computer vision ecosystem</li>
+            <li><strong>Mobile + Backend Split:</strong> Lightweight mobile app, network dependency</li>
+          </ul>
+
+          <h4>7. Evaluation</h4>
+          <ul>
+            <li>High accuracy in detecting and recording attendance</li>
+            <li>Significant reduction in proxy attendance cases</li>
+            <li>Faster attendance processing compared to manual methods</li>
+          </ul>
+
+          <h4>8. Challenges & Solutions</h4>
+          <ul>
+            <li><strong>Lighting and Image Quality:</strong> Improved dataset and preprocessing</li>
+            <li><strong>Recognition Accuracy:</strong> Enhanced by increasing training data and refining algorithms</li>
+            <li><strong>Performance Bottlenecks:</strong> Optimized detection pipeline</li>
+          </ul>
+
+          <h4>9. Limitations</h4>
+          <ul>
+            <li>Sensitive to lighting conditions</li>
+            <li>Requires high-quality training data</li>
+            <li>Limited scalability without cloud deployment</li>
+          </ul>
+
+          <h4>10. Future Improvements</h4>
+          <ul>
+            <li>Liveness detection to prevent spoofing</li>
+            <li>Cloud-based model deployment</li>
+            <li>Multi-camera support for large classrooms</li>
+          </ul>
+
+          <h4>11. Demo</h4>
+          <p><em>A demo link is available below.</em></p>
+
+          <h4>12. Code Availability</h4>
+          <p>Source code available upon request due to privacy restrictions.</p>
+        `
+      },
+
+      // ----- NEW MERBAN PROJECT -----
+      
     ];
 
     // ------------------------------------------------------------
